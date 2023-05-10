@@ -1,2 +1,16 @@
 # calculator
-A calculator developed using flutter that has features such as a Basic Mode, Scientific Mode, BMI calculation, Length Conversion, Weight Conversion, Temperature Conversion, Currency (Fiat) Conversion, and Fiat to Cryptocurrency converter with the current price displayed.
+
+A flutter calculator app that has BMI computation, length conversion, weight conversion, temperature conversion, currency conversion, and fiat to crytpocurrency converter.
+
+## Getting Started
+
+This project is a starting point for a Flutter application.
+
+A few resources to get you started if this is your first Flutter project:
+
+- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+
+For help getting started with Flutter development, view the
+[online documentation](https://docs.flutter.dev/), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
