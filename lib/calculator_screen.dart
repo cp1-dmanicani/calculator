@@ -177,12 +177,10 @@ class _CalculatorState extends State<Calculator> {
       case "=":
         result =  calculate();
         userInput = result;
-
-        if (userInput.endsWith(".0")) {
+        if (userInput.endsWith(".0") || userInput.endsWith("0")) {
           userInput = userInput.replaceAll("0.", "");
           return;
         }
-
         if (result.endsWith(".0")) {
           result = result.replaceAll("0.", "");
           return;

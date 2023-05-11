@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:calculator/other_conversions.dart';
 
 class NavBar extends StatelessWidget {
   const NavBar({super.key});
@@ -22,39 +23,74 @@ class NavBar extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.science),
             title: const Text('Scientific'),
-            onTap: () => null,
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const Scientific()),
+              );
+            },
           ),
           const Divider(),
           ListTile(
             leading: const Icon(Icons.monitor_weight),
             title: const Text('BMI'),
-            onTap: () => null,
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const BMI()),
+              );
+            },
           ),
           ListTile(
             leading: const Icon(Icons.height),
             title: const Text('Length'),
-            onTap: () => null,
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const LengthConv()),
+              );
+            },
           ),
           ListTile(
             leading: const Icon(Icons.scale),
             title: const Text('Weight'),
-            onTap: () => null,
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const WeightConv()),
+              );
+            },
           ),
           ListTile(
             leading: const Icon(Icons.severe_cold),
             title: const Text('Temperature'),
-            onTap: () => null,
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const TemperatureConv()),
+              );
+            },
           ),
           const Divider(),
           ListTile(
             leading: const Icon(Icons.money),
             title: const Text('Fiat (Currency)'),
-            onTap: () => null,
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const CurrencyConv()),
+              );
+            },
           ),
           ListTile(
             title: const Text('Cryptocurrency'),
             leading: const Icon(Icons.currency_bitcoin),
-            onTap: () => null,
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const FiatToCryptoConv()),
+              );
+            },
           ),
         ],
       ),
