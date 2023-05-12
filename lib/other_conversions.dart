@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 
-///Class for Scientific calculations
-class Scientific extends StatelessWidget {
+
+class Scientific extends StatefulWidget {
   const Scientific({super.key});
+  @override
+  State<StatefulWidget> createState() => _Scientific();
+}
+
+///Class for Scientific calculations
+class _Scientific extends State<Scientific> {
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +16,7 @@ class Scientific extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: const Color(0xFF1d2630),
         title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.end,
           children: const [
             SizedBox(
               width: 10,
@@ -19,23 +25,35 @@ class Scientific extends StatelessWidget {
               'Scientific Calculator',
               style: TextStyle(color: Colors.white),
             ),
-            Icon(
-              Icons.science,
-              color: Colors.white,
-            ),
           ],
         ),
         leading: const BackButton(
           color: Colors.white,
         ),
       ),
+      body: Column(
+        children: [
+          const TextField(
+
+          ),
+        ],
+      ),
     );
   }
 }
 
-///Class for BMI calculations
-class BMI extends StatelessWidget {
+class BMI extends StatefulWidget {
   const BMI({super.key});
+  @override
+  State<StatefulWidget> createState() => _BMI();
+}
+
+///Class for BMI calculations
+class _BMI extends State<BMI> {
+  var heightControl = TextEditingController();
+  var weightControl = TextEditingController();
+  var resultBMI = '';
+  var bmiStatus = '';
 
   @override
   Widget build(BuildContext context) {
@@ -43,14 +61,10 @@ class BMI extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: const Color(0xFF1d2630),
         title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.end,
           children: const [
             SizedBox(
               width: 10,
-            ),
-            Icon(
-              Icons.monitor_weight,
-              color: Colors.white,
             ),
             Text(
               'BMI Calculator',
@@ -60,6 +74,115 @@ class BMI extends StatelessWidget {
         ),
         leading: const BackButton(
           color: Colors.white,
+        ),
+      ),
+
+      body: Container(
+        color: Colors.white,
+        child: Center(
+          child: Container(
+            width: 400,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'BMI',
+                  style: TextStyle(
+                    fontSize: 34,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.black54,
+                  ),
+                ),
+                const SizedBox(
+                  height: 35,
+                ),
+                TextField(
+                  controller: heightControl,
+                  decoration: const InputDecoration(
+                    label: Text(
+                      'Enter Your Height (in cm)',
+                      style: TextStyle(fontSize: 16, color: Colors.black38),
+                    ),
+                    prefixIcon: Icon(Icons.height),
+                  ),
+                  style: const TextStyle(
+                    color: Colors.black45,
+                    fontSize: 20
+                  ),
+                  keyboardType: TextInputType.number,
+                ),
+                TextField(
+                  controller: weightControl,
+                  decoration: const InputDecoration(
+                    label: Text(
+                      'Enter Your Weight (in kg)',
+                      style: TextStyle(fontSize: 16, color: Colors.black38),
+                    ),
+                    prefixIcon: Icon(Icons.monitor_weight_outlined),
+                  ),
+                  style: const TextStyle(
+                    color: Colors.black45,
+                    fontSize: 20
+                  ),
+                  keyboardType: TextInputType.number,
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                ElevatedButton(
+                    onPressed: () {
+                      var height = heightControl.text.toString();
+                      var weight = weightControl.text.toString();
+
+                      if (height != '' && weight != '') {
+                        //BMI Calculation
+                          var heightVal = int.parse(height);
+                          var weightVal = int.parse(weight);
+                          double bmiVal = (weightVal/(heightVal*heightVal))*10000;
+
+                          if (bmiVal >= 25) {
+                            bmiStatus = 'You are overweight. Consider losing weight.';
+                          } else if (bmiVal <= 18.5) {
+                            bmiStatus = 'You are underweight. Consider gaining weight.';
+                          } else {
+                            bmiStatus = 'You have a healthy BMI. Good work!';
+                          }
+                          setState(() {
+                            resultBMI = 'Your BMI is: ${bmiVal.toStringAsFixed(2)}';
+                          });
+                      }
+                      else {
+                        setState(() {
+                          resultBMI = "Please fill all required fields!";
+                        });
+                      }
+                    },
+                    child: const Text(
+                        'Calculate'
+                    ),
+                ),
+                const SizedBox(
+                  height: 11,
+                ),
+                Text(
+                  resultBMI,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black45,
+                  ),
+                ),
+                Text(
+                  bmiStatus,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w300,
+                    color: Colors.black45,
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
@@ -76,14 +199,10 @@ class LengthConv extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: const Color(0xFF1d2630),
         title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.end,
           children: const [
             SizedBox(
               width: 10,
-            ),
-            Icon(
-              Icons.height,
-              color: Colors.white,
             ),
             Text(
               'Length Conversion',
@@ -109,14 +228,10 @@ class WeightConv extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: const Color(0xFF1d2630),
         title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.end,
           children: const [
             SizedBox(
               width: 10,
-            ),
-            Icon(
-              Icons.scale,
-              color: Colors.white,
             ),
             Text(
               'Weight Conversion',
@@ -142,14 +257,10 @@ class TemperatureConv extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: const Color(0xFF1d2630),
         title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.end,
           children: const [
             SizedBox(
               width: 10,
-            ),
-            Icon(
-              Icons.severe_cold,
-              color: Colors.white,
             ),
             Text(
               'Temperature Conversion',
@@ -175,14 +286,10 @@ class CurrencyConv extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: const Color(0xFF1d2630),
         title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.end,
           children: const [
             SizedBox(
               width: 10,
-            ),
-            Icon(
-              Icons.money,
-              color: Colors.white,
             ),
             Text(
               'Currency Conversion',
@@ -208,14 +315,10 @@ class FiatToCryptoConv extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: const Color(0xFF1d2630),
         title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.end,
           children: const [
             SizedBox(
               width: 10,
-            ),
-            Icon(
-              Icons.currency_bitcoin,
-              color: Colors.white,
             ),
             Text(
               'Fiat to Crypto Conversion',

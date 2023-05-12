@@ -17,7 +17,8 @@ class CalculatorMain extends StatelessWidget {
       navigatorKey: navigatorKey,  //key
       debugShowCheckedModeBanner: false,
       title: appTitle,
-      theme: ThemeData(primarySwatch: Colors.yellow),
+      theme: ThemeData(
+          primarySwatch: Colors.blueGrey),
       home: const Calculator(),
     );
   }

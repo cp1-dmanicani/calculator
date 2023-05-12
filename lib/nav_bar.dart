@@ -19,7 +19,10 @@ class NavBar extends StatelessWidget {
               ),
             ),
           ),
-          const Divider(),
+          const Divider(
+            color: Colors.grey,
+            thickness: 3,
+          ),
           ListTile(
             leading: const Icon(Icons.science),
             title: const Text('Scientific'),
@@ -37,7 +40,7 @@ class NavBar extends StatelessWidget {
             onTap: () {
               Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const BMI()),
+                  MaterialPageRoute(builder: (context) => BMI()),
               );
             },
           ),
