@@ -1,4 +1,7 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:gauges/gauges.dart';
 
 
 class Scientific extends StatefulWidget {
@@ -31,13 +34,6 @@ class _Scientific extends State<Scientific> {
           color: Colors.white,
         ),
       ),
-      body: Column(
-        children: [
-          const TextField(
-
-          ),
-        ],
-      ),
     );
   }
 }
@@ -52,8 +48,10 @@ class BMI extends StatefulWidget {
 class _BMI extends State<BMI> {
   var heightControl = TextEditingController();
   var weightControl = TextEditingController();
+  var ageControl = TextEditingController();
   var resultBMI = '';
   var bmiStatus = '';
+  double bmiVal = 0.0;
 
   @override
   Widget build(BuildContext context) {
@@ -79,6 +77,7 @@ class _BMI extends State<BMI> {
 
       body: Container(
         color: Colors.white,
+        padding: EdgeInsets.all(20),
         child: Center(
           child: Container(
             width: 400,
@@ -87,10 +86,10 @@ class _BMI extends State<BMI> {
               children: [
                 Text(
                   'BMI',
+                  textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 34,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.black54,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 40,
                   ),
                 ),
                 const SizedBox(
@@ -98,12 +97,14 @@ class _BMI extends State<BMI> {
                 ),
                 TextField(
                   controller: heightControl,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     label: Text(
                       'Enter Your Height (in cm)',
                       style: TextStyle(fontSize: 16, color: Colors.black38),
                     ),
                     prefixIcon: Icon(Icons.height),
+                    border: myInputBorder(),
+                    enabledBorder: myInputBorder(),
                   ),
                   style: const TextStyle(
                     color: Colors.black45,
@@ -111,14 +112,19 @@ class _BMI extends State<BMI> {
                   ),
                   keyboardType: TextInputType.number,
                 ),
+                Container(
+                  height: 20,
+                ),
                 TextField(
                   controller: weightControl,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     label: Text(
                       'Enter Your Weight (in kg)',
                       style: TextStyle(fontSize: 16, color: Colors.black38),
                     ),
                     prefixIcon: Icon(Icons.monitor_weight_outlined),
+                    border: myInputBorder(),
+                    enabledBorder: myInputBorder(),
                   ),
                   style: const TextStyle(
                     color: Colors.black45,
@@ -130,6 +136,14 @@ class _BMI extends State<BMI> {
                   height: 16,
                 ),
                 ElevatedButton(
+                  style: ButtonStyle(
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          side: BorderSide(color: Colors.black45)
+                      ),
+                    ),
+                  ),
                     onPressed: () {
                       var height = heightControl.text.toString();
                       var weight = weightControl.text.toString();
@@ -138,9 +152,11 @@ class _BMI extends State<BMI> {
                         //BMI Calculation
                           var heightVal = int.parse(height);
                           var weightVal = int.parse(weight);
-                          double bmiVal = (weightVal/(heightVal*heightVal))*10000;
+                          bmiVal = (weightVal/(pow(heightVal, 2)))*10000;
 
-                          if (bmiVal >= 25) {
+                          if (bmiVal >= 30 ) {
+                            bmiStatus = 'You are obese. Your health may be at risk. Please consider changing your lifestyle and diet.';
+                          } else if (bmiVal >= 25) {
                             bmiStatus = 'You are overweight. Consider losing weight.';
                           } else if (bmiVal <= 18.5) {
                             bmiStatus = 'You are underweight. Consider gaining weight.';
@@ -158,8 +174,19 @@ class _BMI extends State<BMI> {
                       }
                     },
                     child: const Text(
-                        'Calculate'
+                        'Calculate',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                      ),
                     ),
+                ),
+                const SizedBox(
+                  height: 11,
+                ),
+                Divider(
+                  height: 3,
+                  color: Colors.black54,
                 ),
                 const SizedBox(
                   height: 11,
@@ -171,6 +198,7 @@ class _BMI extends State<BMI> {
                     fontWeight: FontWeight.bold,
                     color: Colors.black45,
                   ),
+                  textAlign: TextAlign.center,
                 ),
                 Text(
                   bmiStatus,
@@ -179,6 +207,60 @@ class _BMI extends State<BMI> {
                     fontWeight: FontWeight.w300,
                     color: Colors.black45,
                   ),
+                  textAlign: TextAlign.center,
+                ),
+                RadialGauge(
+                  axes: [
+                    RadialGaugeAxis(
+                      color: Colors.black26,
+                      minValue: 0,
+                      maxValue: 50,
+                      minAngle: -90,
+                      maxAngle: 90,
+                      radius: 0.6,
+                      width: 0.3,
+                      segments: [
+                        RadialGaugeSegment(
+                          minValue: 0,
+                          maxValue: 18.5,
+                          minAngle: -90,
+                          maxAngle: -23,
+                          color: Colors.blue,
+                        ),
+                        RadialGaugeSegment(
+                          minValue: 18.6,
+                          maxValue: 24.9,
+                          minAngle: -23,
+                          maxAngle: 0,
+                          color: Colors.green,
+                        ),
+                        RadialGaugeSegment(
+                          minValue: 25,
+                          maxValue: 29.9,
+                          minAngle: 0,
+                          maxAngle: 18,
+                          color: Colors.orange,
+                        ),
+                        RadialGaugeSegment(
+                          minValue: 30,
+                          maxValue: 50,
+                          minAngle: 18,
+                          maxAngle: 90,
+                          color: Colors.red,
+                        ),
+                      ],
+                      pointers: [
+                        RadialNeedlePointer(
+                          value: bmiVal,
+                          thicknessStart: 15,
+                          thicknessEnd: 2,
+                          length: 0.5,
+                          knobRadiusAbsolute: 10,
+                          color: Colors.grey,
+                        )
+                      ],
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -332,6 +414,17 @@ class FiatToCryptoConv extends StatelessWidget {
       ),
     );
   }
+}
+
+///Class to add a border outline on a TextField
+OutlineInputBorder myInputBorder(){ //return type is OutlineInputBorder
+  return OutlineInputBorder( //Outline border type for TextField
+      borderRadius: BorderRadius.all(Radius.circular(20)),
+      borderSide: BorderSide(
+        color:Colors.black45,
+        width: 3,
+      )
+  );
 }
 
 

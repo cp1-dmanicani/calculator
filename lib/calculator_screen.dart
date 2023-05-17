@@ -111,7 +111,7 @@ class _CalculatorState extends State<Calculator> {
       child: Ink(
         decoration: BoxDecoration(
           color: getBGColor(text),
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(50),
           boxShadow: [
             BoxShadow(
               color: Colors.white.withOpacity(0.1),
