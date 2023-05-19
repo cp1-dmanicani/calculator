@@ -20,8 +20,8 @@ class NavBar extends StatelessWidget {
             ),
           ),
           const Divider(
-            color: Colors.grey,
-            thickness: 3,
+            color: Colors.black26,
+            thickness: 2,
           ),
           ListTile(
             leading: const Icon(Icons.science),
@@ -33,7 +33,7 @@ class NavBar extends StatelessWidget {
               );
             },
           ),
-          const Divider(),
+          const Divider(thickness: 1,),
           ListTile(
             leading: const Icon(Icons.monitor_weight),
             title: const Text('BMI'),
@@ -44,6 +44,27 @@ class NavBar extends StatelessWidget {
               );
             },
           ),
+          ListTile(
+            leading: const Icon(Icons.person_3),
+            title: const Text('Body Fat'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => BodyFatCalculation()),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.fastfood),
+            title: const Text('Daily Calories'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => DailyCaloriesCalculation()),
+              );
+            },
+          ),
+          const Divider(thickness: 1,),
           ListTile(
             leading: const Icon(Icons.height),
             title: const Text('Length'),
@@ -74,7 +95,7 @@ class NavBar extends StatelessWidget {
               );
             },
           ),
-          const Divider(),
+          const Divider(thickness: 1,),
           ListTile(
             leading: const Icon(Icons.money),
             title: const Text('Fiat (Currency)'),
@@ -95,6 +116,7 @@ class NavBar extends StatelessWidget {
               );
             },
           ),
+          const Divider(thickness: 1,),
         ],
       ),
     );
