@@ -62,10 +62,6 @@ class _BMI extends State<BMI> {
             SizedBox(
               width: 10,
             ),
-            Text(
-              'BMI Calculator',
-              style: TextStyle(color: Colors.white),
-            ),
           ],
         ),
         leading: const BackButton(
@@ -279,6 +275,7 @@ class BodyFatCalculation extends StatefulWidget {
 ///Class for Body Fat Calculations
 class _BodyFatCalculation extends State<BodyFatCalculation> {
   int genderVal = 1;
+  double bodyFatPercentage = 0.0;
   bool isShow = true;
   var ageControlText = TextEditingController();
   var heightControlText = TextEditingController();
@@ -298,10 +295,6 @@ class _BodyFatCalculation extends State<BodyFatCalculation> {
             SizedBox(
               width: 10,
             ),
-            Text(
-              'Body Fat Calculation',
-              style: TextStyle(color: Colors.white),
-            ),
           ],
         ),
         leading: const BackButton(
@@ -319,6 +312,16 @@ class _BodyFatCalculation extends State<BodyFatCalculation> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
+                  Text(
+                    'Body Fat Calculation',
+                    textAlign: TextAlign.justify,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                      fontSize: 35,
+                    ),
+                  ),
+                  SizedBox(height: 10,),
                   Text(
                       'Your Gender',
                     style: TextStyle(
@@ -396,7 +399,7 @@ class _BodyFatCalculation extends State<BodyFatCalculation> {
                         'Enter Your Age',
                         style: TextStyle(fontSize: 16, color: Colors.black38),
                       ),
-                      prefixIcon: Icon(Icons.person),
+                      prefixIcon: Icon(Icons.numbers_rounded),
                       border: myInputBorder(),
                       enabledBorder: myInputBorder(),
                     ),
@@ -488,7 +491,7 @@ class _BodyFatCalculation extends State<BodyFatCalculation> {
                           'Enter Your Hip Measurement (in cm)',
                           style: TextStyle(fontSize: 16, color: Colors.black38),
                         ),
-                        prefixIcon: Icon(Icons.linear_scale_sharp),
+                        prefixIcon: Icon(Icons.accessibility_outlined),
                         border: myInputBorder(),
                         enabledBorder: myInputBorder(),
                       ),
@@ -509,8 +512,43 @@ class _BodyFatCalculation extends State<BodyFatCalculation> {
                       ),
                     ),
                     onPressed: () {
-                      double mWidth = MediaQuery.of(context).size.width;
-                      double mHeight = MediaQuery.of(context).size.height;
+                      String mAge = ageControlText.text.toString();
+                      String mWeight = weightControlText.text.toString();
+                      String mHeight = heightControlText.text.toString();
+                      String mNeckMeasure = neckControlText.text.toString();
+                      String mWaistMeasure = waistControlText.text.toString();
+                      String mHipMeasure = hipControlText.text.toString();
+
+                      double age = double.parse(mAge);
+                      double weight = double.parse(mWeight);
+                      double height = double.parse(mHeight);
+                      double neck = double.parse(mNeckMeasure);
+                      double waist = double.parse(mWaistMeasure);
+
+                      double logBase(num x, num base) => log(x) / log(base);
+
+                      var waistNeck = waist-neck;
+
+                      //If gender is female
+                      if (genderVal == 1) {
+                        double? hip = double.parse(mHipMeasure);
+                        var waistHipNeck = waist+hip-neck;
+                        try {
+                          bodyFatPercentage = 495/((1.29579 - 0.35004*logBase(waistHipNeck, 10) + 0.22100*logBase(height, 10))) - 450;
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(bodyFatPercentage.toString()),));
+                        } on Exception catch (e) {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString(),)));
+                        }
+                      }
+                      //If gender is male
+                      else {
+                        try {
+                          bodyFatPercentage = 495/((1.0324 - 0.19077*logBase(waistNeck, 10) + 0.15456*logBase(height, 10))) - 450;
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(bodyFatPercentage.toString()),));
+                        } on Exception catch (e) {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString(),)));
+                        }
+                      }
 
                       showModalBottomSheet(
                           context: context,
@@ -536,40 +574,105 @@ class _BodyFatCalculation extends State<BodyFatCalculation> {
                                       Column(
                                         children: [
                                           Container(
-                                            height: 350,
+                                            height: 300,
                                             width: 350,
                                             decoration: BoxDecoration(
-                                              border: Border.all(width: 3, color: Colors.black38),
-                                              borderRadius: BorderRadius.all(Radius.circular(20)),
+                                              border: Border.all(width: 2, color: Colors.black38),
+                                              borderRadius: BorderRadius.all(Radius.circular(10)),
                                             ),
                                             child: Column(
+                                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                               children: [
-                                                Text(
-                                                    'Body Fat (U.S. Navy Method)'
+                                                Padding(
+                                                  padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                                  child: Row(
+                                                    mainAxisAlignment: MainAxisAlignment.start,
+                                                    children: [
+                                                      Text(
+                                                          'Body Fat (U.S. Navy Method) : $bodyFatPercentage',
+                                                        textAlign: TextAlign.left,
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
-                                                Text(
-                                                    'Body Fat Category'
+                                                Padding(
+                                                  padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                                  child: Row(
+                                                    mainAxisAlignment: MainAxisAlignment.start,
+                                                    children: [
+                                                      Text(
+                                                          'Body Fat Category',
+                                                        textAlign: TextAlign.left,
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
-                                                Text(
-                                                    'Body Fat Mass'
+                                                Padding(
+                                                  padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                                  child: Row(
+                                                    mainAxisAlignment: MainAxisAlignment.start,
+                                                    children: [
+                                                      Text(
+                                                        'Body Fat Mass',
+                                                        textAlign: TextAlign.left,
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
-                                                Text(
-                                                    'Lean Body Mass'
+                                                Padding(
+                                                  padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                                  child: Row(
+                                                    mainAxisAlignment: MainAxisAlignment.start,
+                                                    children: [
+                                                      Text(
+                                                        'Lean Body Mass',
+                                                        textAlign: TextAlign.left,
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
-                                                Text(
-                                                    'Ideal Body Fat for Given Age (Jackson & Pollard)'
+                                                Padding(
+                                                  padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                                  child: Row(
+                                                    mainAxisAlignment: MainAxisAlignment.start,
+                                                    children: [
+                                                      Text(
+                                                        'Ideal Body Fat for Given Age (Jackson & Pollard)',
+                                                        textAlign: TextAlign.left,
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
-                                                Text(
-                                                    'Body Fat to Lose to Reach Ideal'
+                                                Padding(
+                                                  padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                                  child: Row(
+                                                    mainAxisAlignment: MainAxisAlignment.start,
+                                                    children: [
+                                                      Text(
+                                                        'Body Fat to Lose to Reach Ideal',
+                                                        textAlign: TextAlign.left,
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
-                                                Text(
-                                                    'Body Fat (BMI method)'
+                                                Padding(
+                                                  padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                                  child: Row(
+                                                    mainAxisAlignment: MainAxisAlignment.start,
+                                                    children: [
+                                                      Text(
+                                                        'Body Fat (BMI method)',
+                                                        textAlign: TextAlign.left,
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
                                               ],
                                             ),
                                           ),
                                         ],
                                       ),
+                                      SizedBox(height: 10,),
                                       ElevatedButton(
                                         child: const Text('Close'),
                                         onPressed: () => Navigator.pop(context),
