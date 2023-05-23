@@ -139,6 +139,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.8.3"
+  range_type:
+    dependency: "direct main"
+    description:
+      name: range_type
+      sha256: "429fa1ec7b669e0a66eef48960f3baf076af98f0254cf65859bf76edeb365179"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.7"
   sky_engine:
     dependency: transitive
     description: flutter

@@ -11,7 +11,7 @@ class NavBar extends StatelessWidget {
         children: [
           const ListTile(
             title: Text(
-              'Other Conversions',
+              'Other Calculators',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 20,

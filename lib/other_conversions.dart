@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:gauges/gauges.dart';
+import 'package:range_type/predefined_ranges.dart';
 
 class Scientific extends StatefulWidget {
   const Scientific({super.key});
@@ -275,14 +276,22 @@ class BodyFatCalculation extends StatefulWidget {
 ///Class for Body Fat Calculations
 class _BodyFatCalculation extends State<BodyFatCalculation> {
   int genderVal = 1;
-  double bodyFatPercentage = 0.0;
   bool isShow = true;
+
   var ageControlText = TextEditingController();
   var heightControlText = TextEditingController();
   var weightControlText = TextEditingController();
   var neckControlText = TextEditingController();
   var waistControlText = TextEditingController();
   var hipControlText = TextEditingController();
+  var bodyFatCategory = '';
+
+  double bodyFatPercentage = 0.0;
+  double fatMass = 0.0;
+  double leanMass = 0.0;
+  double idealBodyFatForAge = 0.0;
+  double bodyFatToLoseToReachIdeal = 0.0;
+  double bmiMethod = 0.0;
 
   @override
   Widget build(BuildContext context) {
@@ -331,7 +340,7 @@ class _BodyFatCalculation extends State<BodyFatCalculation> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(20),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
@@ -512,184 +521,255 @@ class _BodyFatCalculation extends State<BodyFatCalculation> {
                       ),
                     ),
                     onPressed: () {
-                      String mAge = ageControlText.text.toString();
-                      String mWeight = weightControlText.text.toString();
-                      String mHeight = heightControlText.text.toString();
-                      String mNeckMeasure = neckControlText.text.toString();
-                      String mWaistMeasure = waistControlText.text.toString();
-                      String mHipMeasure = hipControlText.text.toString();
+                      var mAge = ageControlText.text.toString();
+                      var mWeight = weightControlText.text.toString();
+                      var mHeight = heightControlText.text.toString();
+                      var mNeckMeasure = neckControlText.text.toString();
+                      var mWaistMeasure = waistControlText.text.toString();
+                      var mHipMeasure = hipControlText.text.toString();
 
-                      double age = double.parse(mAge);
+                      int age = int.parse(mAge);
                       double weight = double.parse(mWeight);
                       double height = double.parse(mHeight);
                       double neck = double.parse(mNeckMeasure);
                       double waist = double.parse(mWaistMeasure);
-
                       double logBase(num x, num base) => log(x) / log(base);
-
                       var waistNeck = waist-neck;
 
-                      //If gender is female
-                      if (genderVal == 1) {
-                        double? hip = double.parse(mHipMeasure);
-                        var waistHipNeck = waist+hip-neck;
-                        try {
-                          bodyFatPercentage = 495/((1.29579 - 0.35004*logBase(waistHipNeck, 10) + 0.22100*logBase(height, 10))) - 450;
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(bodyFatPercentage.toString()),));
-                        } on Exception catch (e) {
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString(),)));
-                        }
-                      }
-                      //If gender is male
-                      else {
-                        try {
-                          bodyFatPercentage = 495/((1.0324 - 0.19077*logBase(waistNeck, 10) + 0.15456*logBase(height, 10))) - 450;
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(bodyFatPercentage.toString()),));
-                        } on Exception catch (e) {
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString(),)));
-                        }
-                      }
+                      if (mAge != '' && mWeight != '' && mHeight != '' && mNeckMeasure != '' && mWaistMeasure != '' || mHipMeasure != '') {
+                        //If gender is female
+                        if (genderVal == 1) {
+                          double? hip = double.parse(mHipMeasure);
+                          var waistHipNeck = waist+hip-neck;
+                          try {
+                            setState(() {
+                              bodyFatPercentage = 495/((1.29579 - 0.35004*logBase(waistHipNeck, 10) + 0.22100*logBase(height, 10))) - 450;
+                              fatMass = (bodyFatPercentage * weight)/100;
+                              leanMass = weight - fatMass;
+                            });
 
-                      showModalBottomSheet(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return SingleChildScrollView(
-                              child: Container(
-                                height: 750,
-                                color: Colors.black26,
-                                child: Center(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: <Widget>[
-                                      Container(height: 20,),
-                                      Text(
-                                        'RESULT',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 20,
-                                        ),
-                                      ),
-                                      Container(height: 10,),
-                                      Column(
-                                        children: [
-                                          Container(
-                                            height: 300,
-                                            width: 350,
-                                            decoration: BoxDecoration(
-                                              border: Border.all(width: 2, color: Colors.black38),
-                                              borderRadius: BorderRadius.all(Radius.circular(10)),
-                                            ),
-                                            child: Column(
-                                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                              children: [
-                                                Padding(
-                                                  padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                                                  child: Row(
-                                                    mainAxisAlignment: MainAxisAlignment.start,
-                                                    children: [
-                                                      Text(
-                                                          'Body Fat (U.S. Navy Method) : $bodyFatPercentage',
-                                                        textAlign: TextAlign.left,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                                                  child: Row(
-                                                    mainAxisAlignment: MainAxisAlignment.start,
-                                                    children: [
-                                                      Text(
-                                                          'Body Fat Category',
-                                                        textAlign: TextAlign.left,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                                                  child: Row(
-                                                    mainAxisAlignment: MainAxisAlignment.start,
-                                                    children: [
-                                                      Text(
-                                                        'Body Fat Mass',
-                                                        textAlign: TextAlign.left,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                                                  child: Row(
-                                                    mainAxisAlignment: MainAxisAlignment.start,
-                                                    children: [
-                                                      Text(
-                                                        'Lean Body Mass',
-                                                        textAlign: TextAlign.left,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                                                  child: Row(
-                                                    mainAxisAlignment: MainAxisAlignment.start,
-                                                    children: [
-                                                      Text(
-                                                        'Ideal Body Fat for Given Age (Jackson & Pollard)',
-                                                        textAlign: TextAlign.left,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                                                  child: Row(
-                                                    mainAxisAlignment: MainAxisAlignment.start,
-                                                    children: [
-                                                      Text(
-                                                        'Body Fat to Lose to Reach Ideal',
-                                                        textAlign: TextAlign.left,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                                                  child: Row(
-                                                    mainAxisAlignment: MainAxisAlignment.start,
-                                                    children: [
-                                                      Text(
-                                                        'Body Fat (BMI method)',
-                                                        textAlign: TextAlign.left,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(height: 10,),
-                                      ElevatedButton(
-                                        child: const Text('Close'),
-                                        onPressed: () => Navigator.pop(context),
-                                        style: ButtonStyle(
-                                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                            RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(10.0),
-                                            ),
+                            ///Conditions for determining the body fat category based on the body fat percentage result.
+                            if (bodyFatPercentage >= 32.00) {bodyFatCategory = "Obese";}
+                            else if (bodyFatPercentage >= 25.00) {bodyFatCategory = "Average";}
+                            else if (bodyFatPercentage <= 20.00) {bodyFatCategory = "Athletes";}
+                            else {bodyFatCategory = "Fitness";}
+
+                            ///Conditions for determining the ideal body fat percentage based on age.
+                            if (age >= 55) {idealBodyFatForAge = 26.3;}
+                            else if (age >= 50) {idealBodyFatForAge = 25.2;}
+                            else if (age >= 45) {idealBodyFatForAge = 22.9;}
+                            else if (age >= 40) {idealBodyFatForAge = 22.2;}
+                            else if (age >= 35) {idealBodyFatForAge = 21.5;}
+                            else if (age >= 30) {idealBodyFatForAge = 19.3;}
+                            else if (age >= 25) {idealBodyFatForAge = 18.4;}
+                            else if (age >= 20) {idealBodyFatForAge = 17.7;}
+                            else {idealBodyFatForAge = 17.7;}
+                          }
+                          on Exception catch (e) {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString(),)));
+                          }
+                        }
+                        //If gender is male
+                        else {
+                          try {
+                            setState(() {
+                              bodyFatPercentage = 495/((1.0324 - 0.19077*logBase(waistNeck, 10) + 0.15456*logBase(height, 10))) - 450;
+                              fatMass = (bodyFatPercentage * weight)/100;
+                              leanMass = weight - fatMass;
+                            });
+
+                            ///Conditions for determining the body fat category based on the body fat percentage result.
+                            if (bodyFatPercentage >= 25.00) {bodyFatCategory = "Obese";}
+                            else if (bodyFatPercentage >= 18.00) {bodyFatCategory = "Average";}
+                            else if (bodyFatPercentage <= 13.99) {bodyFatCategory = "Athletes";}
+                            else {bodyFatCategory = "Fitness";}
+
+                            ///Conditions for determining the ideal body fat percentage based on age.
+                            if (age >= 55) {idealBodyFatForAge = 20.9;}
+                            else if (age >= 50) {idealBodyFatForAge = 18.9;}
+                            else if (age >= 45) {idealBodyFatForAge = 16.4;}
+                            else if (age >= 40) {idealBodyFatForAge = 15.3;}
+                            else if (age >= 35) {idealBodyFatForAge = 13.7;}
+                            else if (age >= 30) {idealBodyFatForAge = 12.7;}
+                            else if (age >= 25) {idealBodyFatForAge = 10.5;}
+                            else if (age >= 20) {idealBodyFatForAge = 8.5;}
+                            else {idealBodyFatForAge = 8.5;}
+                          }
+                          on Exception catch (e) {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString(),)));
+                          }
+                        }
+                        ///Compute the body fat to lose to reach the ideal weight
+                        ///based based on Jackson & Pollard Ideal Body Fat Percentages chart.
+                        bodyFatToLoseToReachIdeal = ((bodyFatPercentage-idealBodyFatForAge)/100) * weight;
+                        
+                        showModalBottomSheet(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return SingleChildScrollView(
+                                child: Container(
+                                  height: 750,
+                                  color: Colors.black26,
+                                  child: Center(
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      children: <Widget>[
+                                        Container(height: 20,),
+                                        Text(
+                                          'RESULT',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 20,
                                           ),
                                         ),
-                                      ),
-                                    ],
+                                        Container(height: 10,),
+                                        Column(
+                                          children: [
+                                            Container(
+                                              height: 300,
+                                              width: 350,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                children: [
+                                                  Padding(
+                                                    padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                                    child: Row(
+                                                      mainAxisAlignment: MainAxisAlignment.start,
+                                                      children: [
+                                                        Text(
+                                                          'Body Fat (U.S. Navy Method) : ${bodyFatPercentage.toStringAsFixed(2)}%',
+                                                          textAlign: TextAlign.left,
+                                                          style: TextStyle(
+                                                              fontWeight: FontWeight.bold,
+                                                              fontSize: 18,
+                                                              color: Colors.black54
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  Divider(),
+                                                  Padding(
+                                                    padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                                    child: Row(
+                                                      mainAxisAlignment: MainAxisAlignment.start,
+                                                      children: [
+                                                        Text(
+                                                          'Body Fat Category : ${bodyFatCategory}',
+                                                          textAlign: TextAlign.left,
+                                                          style: TextStyle(
+                                                              fontWeight: FontWeight.bold,
+                                                              fontSize: 18,
+                                                              color: Colors.black54
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  Divider(),
+                                                  Padding(
+                                                    padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                                    child: Row(
+                                                      mainAxisAlignment: MainAxisAlignment.start,
+                                                      children: [
+                                                        Text(
+                                                          'Body Fat Mass : ${fatMass.toStringAsFixed(2)} kg',
+                                                          textAlign: TextAlign.left,
+                                                          style: TextStyle(
+                                                              fontWeight: FontWeight.bold,
+                                                              fontSize: 18,
+                                                              color: Colors.black54
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  Divider(),
+                                                  Padding(
+                                                    padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                                    child: Row(
+                                                      mainAxisAlignment: MainAxisAlignment.start,
+                                                      children: [
+                                                        Text(
+                                                          'Lean Body Mass : ${leanMass.toStringAsFixed(2)} kg',
+                                                          textAlign: TextAlign.left,
+                                                          style: TextStyle(
+                                                              fontWeight: FontWeight.bold,
+                                                              fontSize: 18,
+                                                              color: Colors.black54
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  Divider(),
+                                                  Padding(
+                                                    padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                                    child: Row(
+                                                      mainAxisAlignment: MainAxisAlignment.start,
+                                                      children: [
+                                                        Text(
+                                                          'Ideal Body Fat for Given Age : ${idealBodyFatForAge.toStringAsFixed(2)}%',
+                                                          textAlign: TextAlign.left,
+                                                          style: TextStyle(
+                                                              fontWeight: FontWeight.bold,
+                                                              fontSize: 18,
+                                                              color: Colors.black54
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  Divider(),
+                                                  Padding(
+                                                    padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                                    child: Row(
+                                                      mainAxisAlignment: MainAxisAlignment.start,
+                                                      children: [
+                                                        Text(
+                                                          'Body Fat to Lose to Reach Ideal : ${bodyFatToLoseToReachIdeal.toStringAsFixed(2)} kg',
+                                                          textAlign: TextAlign.left,
+                                                          style: TextStyle(
+                                                              fontWeight: FontWeight.bold,
+                                                              fontSize: 18,
+                                                              color: Colors.black54
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  Divider(),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        Divider(),
+                                        SizedBox(height: 10,),
+                                        ElevatedButton(
+                                          child: const Text('Close'),
+                                          onPressed: () => Navigator.pop(context),
+                                          style: ButtonStyle(
+                                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                              RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.circular(10.0),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                            );
-                      });
+                              );
+                            });
+
+                      } else {
+                        setState(() {
+                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Please fill all the fields to get a result.'),));
+                        });
+                      }
                     },
                     child: const Text(
                       'Calculate',
