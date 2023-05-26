@@ -1,6 +1,6 @@
 # calculator
 
-A flutter calculator app that has BMI computation, length conversion, weight conversion, temperature conversion, currency conversion, and fiat to crytpocurrency converter.
+A flutter calculator app that has BMI computation, body fat calculation, daily calories computation, length conversion, weight conversion, temperature conversion, currency conversion, and fiat to crytpocurrency converter.
 
 ## Getting Started
 
