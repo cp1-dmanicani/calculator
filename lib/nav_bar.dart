@@ -56,11 +56,11 @@ class NavBar extends StatelessWidget {
           ),
           ListTile(
             leading: const Icon(Icons.fastfood),
-            title: const Text('Daily Calories'),
+            title: const Text('BMR (Basal Metabolic Rate)'),
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => DailyCaloriesCalculation()),
+                MaterialPageRoute(builder: (context) => BMRCalculation()),
               );
             },
           ),

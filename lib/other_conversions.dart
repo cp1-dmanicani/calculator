@@ -745,7 +745,6 @@ class _BodyFatCalculation extends State<BodyFatCalculation> {
                                             ),
                                           ],
                                         ),
-                                        Divider(),
                                         SizedBox(height: 10,),
                                         ElevatedButton(
                                           child: const Text('Close'),
@@ -789,29 +788,235 @@ class _BodyFatCalculation extends State<BodyFatCalculation> {
   }
 }
 
+class BMRCalculation extends StatefulWidget {
+  const BMRCalculation({super.key});
+  @override
+  State<StatefulWidget> createState() => _BMRCalculation();
+}
+
 ///Class for Daily Calories calculation
-class DailyCaloriesCalculation extends StatelessWidget {
-  const DailyCaloriesCalculation({super.key});
+class _BMRCalculation extends State<BMRCalculation> {
+  int genderVal = 0;
+  bool isShow = true;
+  String activityDropDownVal = 'BMR';
+
+  var ageControl = TextEditingController();
+  var weightControl = TextEditingController();
+  var heightControl = TextEditingController();
+  var bodyFatValControl = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFF1d2630),
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: const [
-            SizedBox(
-              width: 10,
-            ),
-            Text(
-              'Daily Calories Calculation',
-              style: TextStyle(color: Colors.white),
-            ),
-          ],
-        ),
         leading: const BackButton(
           color: Colors.white,
+        ),
+      ),
+      body: Container(
+        color: Colors.white,
+        padding: EdgeInsets.all(20.0),
+        child: Center(
+          child: Container(
+            width: 350,
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    'BMR Calculation',
+                    textAlign: TextAlign.justify,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                      fontSize: 35,
+                    ),
+                  ),
+                  SizedBox(height: 10,),
+                  Text(
+                    'Your Gender',
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black45,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              genderVal = 0; //Male
+                              isShow = false;
+                            });
+                          },
+                          child: Container(
+                            height: 90,
+                            width: 90,
+                            color: genderVal == 0 ? Colors.black26 : Colors.transparent,
+                            child: Column(
+                              children: [
+                                Container(height: 5,),
+                                Icon(Icons.man, size: 60,),
+                                Container(height: 2,),
+                                Text('Male',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              genderVal = 1; //Female
+                              isShow = true;
+                            });
+                          },
+                          child: Container(
+                            height: 90,
+                            width: 90,
+                            color: genderVal == 1 ? Colors.black26 : Colors.transparent,
+                            child: Column(
+                              children: [
+                                Container(height: 5,),
+                                Icon(Icons.woman, size: 60,),
+                                Container(height: 2,),
+                                Text('Female',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextField(
+                          controller: weightControl,
+                          decoration: InputDecoration(
+                            label: Text(
+                              'Weight (kg)',
+                              style: TextStyle(fontSize: 16, color: Colors.black38),
+                            ),
+                            prefixIcon: Icon(Icons.monitor_weight_outlined),
+                            border: myInputBorder(),
+                            enabledBorder: myInputBorder(),
+                          ),
+                          style: const TextStyle(
+                              color: Colors.black45,
+                              fontSize: 20
+                          ),
+                          keyboardType: TextInputType.number,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 15,
+                      ),
+                      Expanded(
+                        child: TextField(
+                          controller: heightControl,
+                          decoration: InputDecoration(
+                            label: Text(
+                              'Height (cm)',
+                              style: TextStyle(fontSize: 16, color: Colors.black38),
+                            ),
+                            prefixIcon: Icon(Icons.height),
+                            border: myInputBorder(),
+                            enabledBorder: myInputBorder(),
+                          ),
+                          style: const TextStyle(
+                              color: Colors.black45,
+                              fontSize: 20
+                          ),
+                          keyboardType: TextInputType.number,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Container(height: 10,),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextField(
+                          controller: ageControl,
+                          decoration: InputDecoration(
+                            label: Text(
+                              'Age',
+                              style: TextStyle(fontSize: 16, color: Colors.black38),
+                            ),
+                            prefixIcon: Icon(Icons.numbers_sharp),
+                            border: myInputBorder(),
+                            enabledBorder: myInputBorder(),
+                          ),
+                          style: const TextStyle(
+                              color: Colors.black45,
+                              fontSize: 20
+                          ),
+                          keyboardType: TextInputType.number,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 15,
+                      ),
+                      Expanded(
+                        child: DropdownButtonFormField<String>(
+                          decoration: InputDecoration(
+                            enabledBorder: myInputBorder(),
+                            focusedBorder: myInputBorder(),
+                          ),
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.black45,
+                          ),
+                          value: activityDropDownVal,
+                          items: <String>[
+                            'BMR',
+                            'Sedentary',
+                            'Light',
+                            'Moderate',
+                            'Active',
+                            'Very Active',
+                            'Extra Active'
+                          ].map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(
+                                value,
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.black45,),
+                              ),
+                            );
+                          }).toList(),
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              activityDropDownVal = newValue!;
+                            });
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
         ),
       ),
     );
