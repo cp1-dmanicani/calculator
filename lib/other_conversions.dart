@@ -1,7 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:gauges/gauges.dart';
-import 'package:range_type/predefined_ranges.dart';
 
 class Scientific extends StatefulWidget {
   const Scientific({super.key});
@@ -799,11 +798,12 @@ class _BMRCalculation extends State<BMRCalculation> {
   int genderVal = 0;
   bool isShow = true;
   String activityDropDownVal = 'BMR';
+  double bmrFemale = 0.0;
+  double bmrMale = 0.0;
 
-  var ageControl = TextEditingController();
-  var weightControl = TextEditingController();
-  var heightControl = TextEditingController();
-  var bodyFatValControl = TextEditingController();
+  var ageControlText = TextEditingController();
+  var weightControlText = TextEditingController();
+  var heightControlText = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -908,7 +908,7 @@ class _BMRCalculation extends State<BMRCalculation> {
                     children: [
                       Expanded(
                         child: TextField(
-                          controller: weightControl,
+                          controller: weightControlText,
                           decoration: InputDecoration(
                             label: Text(
                               'Weight (kg)',
@@ -930,7 +930,7 @@ class _BMRCalculation extends State<BMRCalculation> {
                       ),
                       Expanded(
                         child: TextField(
-                          controller: heightControl,
+                          controller: heightControlText,
                           decoration: InputDecoration(
                             label: Text(
                               'Height (cm)',
@@ -954,7 +954,7 @@ class _BMRCalculation extends State<BMRCalculation> {
                     children: [
                       Expanded(
                         child: TextField(
-                          controller: ageControl,
+                          controller: ageControlText,
                           decoration: InputDecoration(
                             label: Text(
                               'Age',
@@ -976,6 +976,7 @@ class _BMRCalculation extends State<BMRCalculation> {
                       ),
                       Expanded(
                         child: DropdownButtonFormField<String>(
+                          isExpanded: true,
                           decoration: InputDecoration(
                             enabledBorder: myInputBorder(),
                             focusedBorder: myInputBorder(),
@@ -984,26 +985,35 @@ class _BMRCalculation extends State<BMRCalculation> {
                             fontSize: 20,
                             color: Colors.black45,
                           ),
-                          value: activityDropDownVal,
                           items: <String>[
                             'BMR',
                             'Sedentary',
                             'Light',
                             'Moderate',
-                            'Active',
                             'Very Active',
                             'Extra Active'
                           ].map<DropdownMenuItem<String>>((String value) {
                             return DropdownMenuItem<String>(
                               value: value,
-                              child: Text(
-                                value,
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.black45,),
+                              child: Center(
+                                child: Text(
+                                  value,
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.black45,),
+                                ),
                               ),
                             );
                           }).toList(),
+                          hint: Align(
+                              alignment: Alignment.center,
+                              child: Text(
+                                  'Activity',
+                                  style: TextStyle(
+                                    fontSize: 17,
+                                    color: Colors.black45,),
+                              ),
+                          ),
                           onChanged: (String? newValue) {
                             setState(() {
                               activityDropDownVal = newValue!;
@@ -1012,6 +1022,93 @@ class _BMRCalculation extends State<BMRCalculation> {
                         ),
                       ),
                     ],
+                  ),
+                  SizedBox(height: 10,),
+                  ElevatedButton(
+                    style: ButtonStyle(
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                      ),
+                    ),
+                    onPressed: () {
+                      var mAge = ageControlText.text.toString();
+                      var mWeight = weightControlText.text.toString();
+                      var mHeight = heightControlText.text.toString();
+
+                      int age = int.parse(mAge);
+                      double weight = double.parse(mWeight);
+                      double height = double.parse(mHeight);
+
+                      bmrMale = 10 * weight + 6.25 * height - 5 * age + 5;
+                      bmrFemale = 10 * weight + 6.25 * height - 5 * age - 161;
+
+                      //If gender is female
+                      if (genderVal==1) {
+                        switch (activityDropDownVal) {
+                          case 'BMR':
+                            bmrFemale = bmrFemale * 1;
+                            break;
+                          case 'Sedentary':
+                            bmrFemale = bmrFemale * 1.2;
+                            break;
+                          case 'Light':
+                            bmrFemale = bmrFemale * 1.375;
+                            break;
+                          case 'Moderate':
+                            bmrFemale = bmrFemale * 1.55;
+                            break;
+                          case 'Very Active':
+                            bmrFemale = bmrFemale * 1.725;
+                            break;
+                          case 'Extra Active':
+                            bmrFemale = bmrFemale * 1.9;
+                            break;
+                        }
+                      }
+                      //If gender is male
+                      else {
+                        switch (activityDropDownVal) {
+                          case 'BMR':
+                            bmrMale = bmrMale * 1;
+                            break;
+                          case 'Sedentary':
+                            bmrMale = bmrMale * 1.2;
+                            break;
+                          case 'Light':
+                            bmrMale = bmrMale * 1.375;
+                            break;
+                          case 'Moderate':
+                            bmrMale = bmrMale * 1.55;
+                            break;
+                          case 'Very Active':
+                            bmrMale = bmrMale * 1.725;
+                            break;
+                          case 'Extra Active':
+                            bmrMale = bmrMale * 1.9;
+                            break;
+                        }
+                      }
+                      setState(() {
+                        bmrMale;
+                        bmrFemale;
+                      });
+                    },
+                    child: const Text(
+                      'Calculate',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                      ),
+                    ),
+                  ),
+                  Text(
+                    bmrMale.toString(),
+                  ),
+                  SizedBox(height: 10,),
+                  Text(
+                    bmrFemale.toString(),
                   ),
                 ],
               ),
