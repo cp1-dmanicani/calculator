@@ -56,9 +56,9 @@ class _BMI extends State<BMI> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFF1d2630),
-        title: Row(
+        title: const Row(
           mainAxisAlignment: MainAxisAlignment.end,
-          children: const [
+          children: [
             SizedBox(
               width: 10,
             ),
@@ -73,13 +73,13 @@ class _BMI extends State<BMI> {
         color: Colors.white,
         padding: EdgeInsets.all(20),
         child: Center(
-          child: Container(
+          child: SizedBox(
             width: 350,
             child: SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
+                  const Text(
                     'BMI',
                     textAlign: TextAlign.center,
                     style: TextStyle(
@@ -178,7 +178,7 @@ class _BMI extends State<BMI> {
                   const SizedBox(
                     height: 11,
                   ),
-                  Divider(
+                  const Divider(
                     height: 3,
                     color: Colors.black54,
                   ),
@@ -214,28 +214,28 @@ class _BMI extends State<BMI> {
                         radius: 0.6,
                         width: 0.3,
                         segments: [
-                          RadialGaugeSegment(
+                          const RadialGaugeSegment(
                             minValue: 0,
                             maxValue: 18.5,
                             minAngle: -90,
                             maxAngle: -23,
                             color: Colors.blue,
                           ),
-                          RadialGaugeSegment(
+                          const RadialGaugeSegment(
                             minValue: 18.6,
                             maxValue: 24.9,
                             minAngle: -23,
                             maxAngle: 0,
                             color: Colors.green,
                           ),
-                          RadialGaugeSegment(
+                          const RadialGaugeSegment(
                             minValue: 25,
                             maxValue: 29.9,
                             minAngle: 0,
                             maxAngle: 18,
                             color: Colors.orange,
                           ),
-                          RadialGaugeSegment(
+                          const RadialGaugeSegment(
                             minValue: 30,
                             maxValue: 50,
                             minAngle: 18,
@@ -312,15 +312,15 @@ class _BodyFatCalculation extends State<BodyFatCalculation> {
 
       body: Container(
         color: Colors.white,
-        padding: EdgeInsets.all(5),
+        padding: const EdgeInsets.all(5),
         child: Center(
-          child: Container(
+          child: SizedBox(
             width: 350,
             child: SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     'Body Fat Calculation',
                     textAlign: TextAlign.justify,
                     style: TextStyle(
@@ -330,7 +330,7 @@ class _BodyFatCalculation extends State<BodyFatCalculation> {
                     ),
                   ),
                   SizedBox(height: 10,),
-                  Text(
+                  const Text(
                       'Your Gender',
                     style: TextStyle(
                       fontSize: 15,
@@ -359,7 +359,7 @@ class _BodyFatCalculation extends State<BodyFatCalculation> {
                                 Container(height: 5,),
                                 Icon(Icons.man, size: 60,),
                                 Container(height: 2,),
-                                Text('Male',
+                                const Text('Male',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                         fontWeight: FontWeight.w700,
@@ -386,7 +386,7 @@ class _BodyFatCalculation extends State<BodyFatCalculation> {
                                 Container(height: 5,),
                                 Icon(Icons.woman, size: 60,),
                                 Container(height: 2,),
-                                Text('Female',
+                                const Text('Female',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontWeight: FontWeight.w700,
@@ -614,7 +614,7 @@ class _BodyFatCalculation extends State<BodyFatCalculation> {
                                       mainAxisAlignment: MainAxisAlignment.start,
                                       children: <Widget>[
                                         Container(height: 20,),
-                                        Text(
+                                        const Text(
                                           'RESULT',
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
@@ -625,7 +625,7 @@ class _BodyFatCalculation extends State<BodyFatCalculation> {
                                         Container(height: 10,),
                                         Column(
                                           children: [
-                                            Container(
+                                            SizedBox(
                                               height: 300,
                                               width: 350,
                                               child: Column(
@@ -639,9 +639,9 @@ class _BodyFatCalculation extends State<BodyFatCalculation> {
                                                         Text(
                                                           'Body Fat (U.S. Navy Method) : ${bodyFatPercentage.toStringAsFixed(2)}%',
                                                           textAlign: TextAlign.left,
-                                                          style: TextStyle(
+                                                          style: const TextStyle(
                                                               fontWeight: FontWeight.bold,
-                                                              fontSize: 18,
+                                                              fontSize: 16,
                                                               color: Colors.black54
                                                           ),
                                                         ),
@@ -655,18 +655,18 @@ class _BodyFatCalculation extends State<BodyFatCalculation> {
                                                       mainAxisAlignment: MainAxisAlignment.start,
                                                       children: [
                                                         Text(
-                                                          'Body Fat Category : ${bodyFatCategory}',
+                                                          'Body Fat Category : $bodyFatCategory',
                                                           textAlign: TextAlign.left,
-                                                          style: TextStyle(
+                                                          style: const TextStyle(
                                                               fontWeight: FontWeight.bold,
-                                                              fontSize: 18,
+                                                              fontSize: 16,
                                                               color: Colors.black54
                                                           ),
                                                         ),
                                                       ],
                                                     ),
                                                   ),
-                                                  Divider(),
+                                                  const Divider(),
                                                   Padding(
                                                     padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
                                                     child: Row(
@@ -675,16 +675,16 @@ class _BodyFatCalculation extends State<BodyFatCalculation> {
                                                         Text(
                                                           'Body Fat Mass : ${fatMass.toStringAsFixed(2)} kg',
                                                           textAlign: TextAlign.left,
-                                                          style: TextStyle(
+                                                          style: const TextStyle(
                                                               fontWeight: FontWeight.bold,
-                                                              fontSize: 18,
+                                                              fontSize: 16,
                                                               color: Colors.black54
                                                           ),
                                                         ),
                                                       ],
                                                     ),
                                                   ),
-                                                  Divider(),
+                                                  const Divider(),
                                                   Padding(
                                                     padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
                                                     child: Row(
@@ -693,9 +693,9 @@ class _BodyFatCalculation extends State<BodyFatCalculation> {
                                                         Text(
                                                           'Lean Body Mass : ${leanMass.toStringAsFixed(2)} kg',
                                                           textAlign: TextAlign.left,
-                                                          style: TextStyle(
+                                                          style: const TextStyle(
                                                               fontWeight: FontWeight.bold,
-                                                              fontSize: 18,
+                                                              fontSize: 16,
                                                               color: Colors.black54
                                                           ),
                                                         ),
@@ -711,9 +711,9 @@ class _BodyFatCalculation extends State<BodyFatCalculation> {
                                                         Text(
                                                           'Ideal Body Fat for Given Age : ${idealBodyFatForAge.toStringAsFixed(2)}%',
                                                           textAlign: TextAlign.left,
-                                                          style: TextStyle(
+                                                          style: const TextStyle(
                                                               fontWeight: FontWeight.bold,
-                                                              fontSize: 18,
+                                                              fontSize: 16,
                                                               color: Colors.black54
                                                           ),
                                                         ),
@@ -729,9 +729,9 @@ class _BodyFatCalculation extends State<BodyFatCalculation> {
                                                         Text(
                                                           'Body Fat to Lose to Reach Ideal : ${bodyFatToLoseToReachIdeal.toStringAsFixed(2)} kg',
                                                           textAlign: TextAlign.left,
-                                                          style: TextStyle(
+                                                          style: const TextStyle(
                                                               fontWeight: FontWeight.bold,
-                                                              fontSize: 18,
+                                                              fontSize: 16,
                                                               color: Colors.black54
                                                           ),
                                                         ),
@@ -744,9 +744,8 @@ class _BodyFatCalculation extends State<BodyFatCalculation> {
                                             ),
                                           ],
                                         ),
-                                        SizedBox(height: 10,),
+                                        const SizedBox(height: 10,),
                                         ElevatedButton(
-                                          child: const Text('Close'),
                                           onPressed: () => Navigator.pop(context),
                                           style: ButtonStyle(
                                             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -755,6 +754,7 @@ class _BodyFatCalculation extends State<BodyFatCalculation> {
                                               ),
                                             ),
                                           ),
+                                          child: const Text('Close'),
                                         ),
                                       ],
                                     ),
@@ -774,6 +774,29 @@ class _BodyFatCalculation extends State<BodyFatCalculation> {
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 15,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 10,),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        genderVal = 0; //Male
+                        ageControlText.clear();
+                        weightControlText.clear();
+                        heightControlText.clear();
+                        neckControlText.clear();
+                        waistControlText.clear();
+                        hipControlText.clear();
+                      });
+                    },
+                    child: const Text(
+                      'Clear',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w700,
+                        color: Colors.redAccent,
+                        fontSize: 17,
+                        decoration: TextDecoration.underline,
                       ),
                     ),
                   ),
@@ -797,9 +820,10 @@ class BMRCalculation extends StatefulWidget {
 class _BMRCalculation extends State<BMRCalculation> {
   int genderVal = 0;
   bool isShow = true;
-  String activityDropDownVal = 'BMR';
+  late String activityDropDownVal;
   double bmrFemale = 0.0;
   double bmrMale = 0.0;
+  double bmrVal = 0.0;
 
   var ageControlText = TextEditingController();
   var weightControlText = TextEditingController();
@@ -818,13 +842,13 @@ class _BMRCalculation extends State<BMRCalculation> {
         color: Colors.white,
         padding: EdgeInsets.all(20.0),
         child: Center(
-          child: Container(
+          child: SizedBox(
             width: 350,
             child: SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     'BMR Calculation',
                     textAlign: TextAlign.justify,
                     style: TextStyle(
@@ -834,7 +858,7 @@ class _BMRCalculation extends State<BMRCalculation> {
                     ),
                   ),
                   SizedBox(height: 10,),
-                  Text(
+                  const Text(
                     'Your Gender',
                     style: TextStyle(
                       fontSize: 15,
@@ -863,7 +887,7 @@ class _BMRCalculation extends State<BMRCalculation> {
                                 Container(height: 5,),
                                 Icon(Icons.man, size: 60,),
                                 Container(height: 2,),
-                                Text('Male',
+                                const Text('Male',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontWeight: FontWeight.w700,
@@ -890,7 +914,7 @@ class _BMRCalculation extends State<BMRCalculation> {
                                 Container(height: 5,),
                                 Icon(Icons.woman, size: 60,),
                                 Container(height: 2,),
-                                Text('Female',
+                                const Text('Female',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontWeight: FontWeight.w700,
@@ -925,7 +949,7 @@ class _BMRCalculation extends State<BMRCalculation> {
                           keyboardType: TextInputType.number,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 15,
                       ),
                       Expanded(
@@ -971,7 +995,7 @@ class _BMRCalculation extends State<BMRCalculation> {
                           keyboardType: TextInputType.number,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 15,
                       ),
                       Expanded(
@@ -981,7 +1005,7 @@ class _BMRCalculation extends State<BMRCalculation> {
                             enabledBorder: myInputBorder(),
                             focusedBorder: myInputBorder(),
                           ),
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 20,
                             color: Colors.black45,
                           ),
@@ -998,14 +1022,14 @@ class _BMRCalculation extends State<BMRCalculation> {
                               child: Center(
                                 child: Text(
                                   value,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 20,
                                     color: Colors.black45,),
                                 ),
                               ),
                             );
                           }).toList(),
-                          hint: Align(
+                          hint: const Align(
                               alignment: Alignment.center,
                               child: Text(
                                   'Activity',
@@ -1023,7 +1047,7 @@ class _BMRCalculation extends State<BMRCalculation> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 10,),
+                  const SizedBox(height: 10,),
                   ElevatedButton(
                     style: ButtonStyle(
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -1047,52 +1071,31 @@ class _BMRCalculation extends State<BMRCalculation> {
                       //If gender is female
                       if (genderVal==1) {
                         switch (activityDropDownVal) {
-                          case 'BMR':
-                            bmrFemale = bmrFemale * 1;
-                            break;
-                          case 'Sedentary':
-                            bmrFemale = bmrFemale * 1.2;
-                            break;
-                          case 'Light':
-                            bmrFemale = bmrFemale * 1.375;
-                            break;
-                          case 'Moderate':
-                            bmrFemale = bmrFemale * 1.55;
-                            break;
-                          case 'Very Active':
-                            bmrFemale = bmrFemale * 1.725;
-                            break;
-                          case 'Extra Active':
-                            bmrFemale = bmrFemale * 1.9;
-                            break;
+                          case 'BMR': bmrFemale = bmrFemale * 1; break;
+                          case 'Sedentary': bmrFemale = bmrFemale * 1.2; break;
+                          case 'Light': bmrFemale = bmrFemale * 1.375; break;
+                          case 'Moderate': bmrFemale = bmrFemale * 1.55; break;
+                          case 'Very Active': bmrFemale = bmrFemale * 1.725; break;
+                          case 'Extra Active': bmrFemale = bmrFemale * 1.9; break;
                         }
+                        bmrVal = bmrFemale;
                       }
                       //If gender is male
                       else {
                         switch (activityDropDownVal) {
-                          case 'BMR':
-                            bmrMale = bmrMale * 1;
-                            break;
-                          case 'Sedentary':
-                            bmrMale = bmrMale * 1.2;
-                            break;
-                          case 'Light':
-                            bmrMale = bmrMale * 1.375;
-                            break;
-                          case 'Moderate':
-                            bmrMale = bmrMale * 1.55;
-                            break;
-                          case 'Very Active':
-                            bmrMale = bmrMale * 1.725;
-                            break;
-                          case 'Extra Active':
-                            bmrMale = bmrMale * 1.9;
-                            break;
+                          case 'BMR': bmrMale = bmrMale * 1; break;
+                          case 'Sedentary': bmrMale = bmrMale * 1.2; break;
+                          case 'Light': bmrMale = bmrMale * 1.375; break;
+                          case 'Moderate': bmrMale = bmrMale * 1.55; break;
+                          case 'Very Active': bmrMale = bmrMale * 1.725; break;
+                          case 'Extra Active': bmrMale = bmrMale * 1.9; break;
                         }
+                        bmrVal = bmrMale;
                       }
                       setState(() {
                         bmrMale;
                         bmrFemale;
+                        bmrVal;
                       });
                     },
                     child: const Text(
@@ -1103,12 +1106,95 @@ class _BMRCalculation extends State<BMRCalculation> {
                       ),
                     ),
                   ),
+                  SizedBox(height: 20,),
                   Text(
-                    bmrMale.toString(),
+                    'Your Estimated Daily Calories : ${bmrVal.toStringAsFixed(2)}',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w700,
+                      color: Colors.black45,
+                      fontSize: 15,
+                    ),
                   ),
-                  SizedBox(height: 10,),
-                  Text(
-                    bmrFemale.toString(),
+                  SizedBox(height: 20,),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        genderVal = 0; //Female
+                        ageControlText.clear();
+                        weightControlText.clear();
+                        heightControlText.clear();
+                      });
+                    },
+                    child: const Text(
+                    'Clear',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      color: Colors.redAccent,
+                      fontSize: 17,
+                      decoration: TextDecoration.underline,
+                    ),
+                   ),
+                  ),
+                  const SizedBox(height: 20,),
+                  Container(
+                    child: const Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          '• BMR (Basal Metabolic Rate)',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            color: Colors.black38,
+                            fontSize: 12,
+                          ),
+                        ),
+                        SizedBox(height: 10,),
+                        Text(
+                          '• Sedentary (little or no exercise)',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            color: Colors.black38,
+                            fontSize: 12,
+                          ),
+                        ),
+                        SizedBox(height: 10,),
+                        Text(
+                          '• Light (light exercise/sports 1-3 days/week)',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            color: Colors.black38,
+                            fontSize: 12,
+                          ),
+                        ),
+                        SizedBox(height: 10,),
+                        Text(
+                          '• Moderate (moderate exercise/sports 3-5 days/week)',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            color: Colors.black38,
+                            fontSize: 12,
+                          ),
+                        ),
+                        SizedBox(height: 10,),
+                        Text(
+                          '• Very Active (hard exercise/sports 6-7 days a week)',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            color: Colors.black38,
+                            fontSize: 12,
+                          ),
+                        ),
+                        SizedBox(height: 10,),
+                        Text(
+                          '• Extra Active (very hard exercise/sports & physical job or 2x training)',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            color: Colors.black38,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
