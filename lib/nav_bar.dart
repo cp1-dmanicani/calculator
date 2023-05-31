@@ -71,7 +71,7 @@ class NavBar extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const LengthConv()),
+                MaterialPageRoute(builder: (context) => const LengthConversion()),
               );
             },
           ),

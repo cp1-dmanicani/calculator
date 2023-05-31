@@ -1206,29 +1206,202 @@ class _BMRCalculation extends State<BMRCalculation> {
   }
 }
 
+class LengthConversion extends StatefulWidget {
+  const LengthConversion({super.key});
+  @override
+  State<StatefulWidget> createState() => _LengthConversion();
+}
+
 ///Class for Length conversions
-class LengthConv extends StatelessWidget {
-  const LengthConv({super.key});
+class _LengthConversion extends State<LengthConversion> {
+  late String convertFromVal;
+  late String convertedToVal;
+  String convertFromDefaultVal = 'Meter';
+  String convertedToDefaultVal = 'Centimeter';
+
+  var lengthA = TextEditingController();
+  var lengthB = TextEditingController();
+
+  List<String> lengthItems = [
+    'Kilometre',
+    'Meter',
+    'Centimeter',
+    'Millimetre',
+    'Micrometre',
+    'Nanometre',
+    'Mile',
+    'Yard',
+    'Foot',
+    'Inch',
+    'Nautical Mile'];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFF1d2630),
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: const [
-            SizedBox(
-              width: 10,
-            ),
-            Text(
-              'Length Conversion',
-              style: TextStyle(color: Colors.white),
-            ),
-          ],
-        ),
         leading: const BackButton(
           color: Colors.white,
+        ),
+      ),
+      body: Container(
+        color: Colors.white,
+        padding: EdgeInsets.all(20.0),
+        child: Center(
+          child: SizedBox(
+            width: 350,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  const Text(
+                    'Length Conversion',
+                    textAlign: TextAlign.justify,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                      fontSize: 35,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Column(
+                    children: [
+                      Container(
+                        height: 250,
+                          padding: const EdgeInsets.all(16.0),
+                          decoration: BoxDecoration(
+                          border: Border.all(width: 5, color: Colors.black45),
+                          borderRadius: BorderRadius.all(Radius.circular(25)),
+                          ),
+                        child: Column(
+                          children: [
+                            const Text(
+                              'Convert from :',
+                              style: TextStyle(
+                                fontSize: 15,
+                                color: Colors.black45,
+                              ),
+                              textAlign: TextAlign.start,
+                            ),
+                            const SizedBox(height: 15,),
+                            Expanded(
+                              child: DropdownButtonFormField<String>(
+                                isExpanded: true,
+                                decoration: InputDecoration(
+                                  enabledBorder: myInputBorder(),
+                                  focusedBorder: myInputBorder(),
+                                ),
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.black45,
+                                ),
+                                value: convertFromDefaultVal,
+                                items: lengthItems.map<DropdownMenuItem<String>>((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Center(
+                                      child: Text(
+                                        value,
+                                        style: const TextStyle(
+                                          fontSize: 20,
+                                          color: Colors.black45,),
+                                      ),
+                                    ),
+                                  );
+                                }).toList(),
+                                hint: Align(
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    convertFromDefaultVal,
+                                    style: const TextStyle(
+                                      fontSize: 17,
+                                      color: Colors.black45,),
+                                  ),
+                                ),
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    convertFromVal = newValue!;
+                                  });
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 25,),
+                  Column(
+                    children: [
+                      Container(
+                        height: 250,
+                          padding: const EdgeInsets.all(16.0),
+                          decoration: BoxDecoration(
+                          border: Border.all(width: 5, color: Colors.black45),
+                          borderRadius: BorderRadius.all(Radius.circular(25)),
+                        ),
+                        child: Column(
+                          children: [
+                            const Text(
+                              'Converted to :',
+                              style: TextStyle(
+                                fontSize: 15,
+                                color: Colors.black45,
+                              ),
+                              textAlign: TextAlign.start,
+                            ),
+                            const SizedBox(height: 15,),
+                            Expanded(
+                              child: DropdownButtonFormField<String>(
+                                isExpanded: true,
+                                decoration: InputDecoration(
+                                  enabledBorder: myInputBorder(),
+                                  focusedBorder: myInputBorder(),
+                                ),
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.black45,
+                                ),
+                                value: convertedToDefaultVal,
+                                items: lengthItems.map<DropdownMenuItem<String>>((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Center(
+                                      child: Text(
+                                        value,
+                                        style: const TextStyle(
+                                          fontSize: 20,
+                                          color: Colors.black45,),
+                                      ),
+                                    ),
+                                  );
+                                }).toList(),
+                                hint: Align(
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    convertFromDefaultVal,
+                                    style: const TextStyle(
+                                      fontSize: 17,
+                                      color: Colors.black45,),
+                                  ),
+                                ),
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    convertFromVal = newValue!;
+                                  });
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
         ),
       ),
     );
