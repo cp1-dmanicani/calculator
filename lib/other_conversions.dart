@@ -1214,13 +1214,14 @@ class LengthConversion extends StatefulWidget {
 
 ///Class for Length conversions
 class _LengthConversion extends State<LengthConversion> {
-  late String convertFromVal;
-  late String convertedToVal;
-  String convertFromDefaultVal = 'Meter';
-  String convertedToDefaultVal = 'Centimeter';
+  TextEditingController firstConversion = TextEditingController();
+  TextEditingController secondConversion = TextEditingController();
 
-  var lengthA = TextEditingController();
-  var lengthB = TextEditingController();
+  var valA = '';
+  double resultVal = 0.0;
+
+  String convertFromVal = '';
+  String convertedToVal = '';
 
   List<String> lengthItems = [
     'Kilometre',
@@ -1233,7 +1234,8 @@ class _LengthConversion extends State<LengthConversion> {
     'Yard',
     'Foot',
     'Inch',
-    'Nautical Mile'];
+    'Nautical Mile'
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -1268,8 +1270,9 @@ class _LengthConversion extends State<LengthConversion> {
                   Column(
                     children: [
                       Container(
-                        height: 250,
-                          padding: const EdgeInsets.all(16.0),
+                        height: 200,
+                        width: 350,
+                          padding: const EdgeInsets.all(5.0),
                           decoration: BoxDecoration(
                           border: Border.all(width: 5, color: Colors.black45),
                           borderRadius: BorderRadius.all(Radius.circular(25)),
@@ -1280,51 +1283,72 @@ class _LengthConversion extends State<LengthConversion> {
                               'Convert from :',
                               style: TextStyle(
                                 fontSize: 15,
-                                color: Colors.black45,
+                                color: Colors.black87,
+                                fontWeight: FontWeight.bold,
                               ),
                               textAlign: TextAlign.start,
                             ),
                             const SizedBox(height: 15,),
-                            Expanded(
-                              child: DropdownButtonFormField<String>(
-                                isExpanded: true,
-                                decoration: InputDecoration(
-                                  enabledBorder: myInputBorder(),
-                                  focusedBorder: myInputBorder(),
-                                ),
-                                style: const TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.black45,
-                                ),
-                                value: convertFromDefaultVal,
-                                items: lengthItems.map<DropdownMenuItem<String>>((String value) {
-                                  return DropdownMenuItem<String>(
-                                    value: value,
-                                    child: Center(
-                                      child: Text(
-                                        value,
-                                        style: const TextStyle(
-                                          fontSize: 20,
-                                          color: Colors.black45,),
+                            SizedBox(
+                              child: Container(
+                                width: 150,
+                                height: 50,
+                                child: DropdownButtonFormField<String>(
+                                  isExpanded: true,
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.black45,
+                                  ),
+                                  items: lengthItems.map<DropdownMenuItem<String>>((String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Center(
+                                        child: Text(
+                                          value,
+                                          style: const TextStyle(
+                                            fontSize: 20,
+                                            color: Colors.black45,),
+                                        ),
                                       ),
+                                    );
+                                  }).toList(),
+                                  hint: const Align(
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      'Units',
+                                      style: TextStyle(
+                                        fontSize: 17,
+                                        color: Colors.black45,),
                                     ),
-                                  );
-                                }).toList(),
-                                hint: Align(
-                                  alignment: Alignment.center,
+                                  ),
+                                  onChanged: (String? newValue) {
+                                    setState(() {
+                                      //Current value of the drop down button
+                                      convertFromVal = newValue!;
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 20,),
+                            TextField(
+                              controller: firstConversion,
+                              textAlign: TextAlign.center,
+                              decoration: InputDecoration(
+                                border: myInputBorder(),
+                                enabledBorder: myInputBorder(),
+                                label: const Center(
                                   child: Text(
-                                    convertFromDefaultVal,
-                                    style: const TextStyle(
-                                      fontSize: 17,
-                                      color: Colors.black45,),
+                                    'Enter Value',
+                                    style: TextStyle(fontSize: 16, color: Colors.black38),
                                   ),
                                 ),
-                                onChanged: (String? newValue) {
-                                  setState(() {
-                                    convertFromVal = newValue!;
-                                  });
-                                },
                               ),
+                              style: const TextStyle(
+                                  color: Colors.black45,
+                                  fontSize: 20
+                              ),
+                              keyboardType: TextInputType.number,
                             ),
                           ],
                         ),
@@ -1335,8 +1359,9 @@ class _LengthConversion extends State<LengthConversion> {
                   Column(
                     children: [
                       Container(
-                        height: 250,
-                          padding: const EdgeInsets.all(16.0),
+                        height: 200,
+                          width: 350,
+                          padding: const EdgeInsets.all(5.0),
                           decoration: BoxDecoration(
                           border: Border.all(width: 5, color: Colors.black45),
                           borderRadius: BorderRadius.all(Radius.circular(25)),
@@ -1344,59 +1369,169 @@ class _LengthConversion extends State<LengthConversion> {
                         child: Column(
                           children: [
                             const Text(
-                              'Converted to :',
+                              'Convert to :',
                               style: TextStyle(
                                 fontSize: 15,
-                                color: Colors.black45,
+                                color: Colors.black87,
+                                fontWeight: FontWeight.bold,
                               ),
                               textAlign: TextAlign.start,
                             ),
                             const SizedBox(height: 15,),
-                            Expanded(
-                              child: DropdownButtonFormField<String>(
-                                isExpanded: true,
-                                decoration: InputDecoration(
-                                  enabledBorder: myInputBorder(),
-                                  focusedBorder: myInputBorder(),
-                                ),
-                                style: const TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.black45,
-                                ),
-                                value: convertedToDefaultVal,
-                                items: lengthItems.map<DropdownMenuItem<String>>((String value) {
-                                  return DropdownMenuItem<String>(
-                                    value: value,
-                                    child: Center(
-                                      child: Text(
-                                        value,
-                                        style: const TextStyle(
-                                          fontSize: 20,
-                                          color: Colors.black45,),
-                                      ),
-                                    ),
-                                  );
-                                }).toList(),
-                                hint: Align(
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    convertFromDefaultVal,
-                                    style: const TextStyle(
-                                      fontSize: 17,
-                                      color: Colors.black45,),
+                            SizedBox(
+                              child: Container(
+                                width: 150,
+                                height: 50,
+                                child: DropdownButtonFormField<String>(
+                                  isExpanded: true,
+                                  style: const TextStyle(
+                                    fontSize: 17,
+                                    color: Colors.black45,
                                   ),
+                                  items: lengthItems.map<DropdownMenuItem<String>>((String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Center(
+                                        child: Text(
+                                          value,
+                                          style: const TextStyle(
+                                            fontSize: 20,
+                                            color: Colors.black45,),
+                                        ),
+                                      ),
+                                    );
+                                  }).toList(),
+                                  hint: const Align(
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      'Units',
+                                      style: TextStyle(
+                                        fontSize: 17,
+                                        color: Colors.black45,),
+                                    ),
+                                  ),
+                                  onChanged: (String? newValue) {
+                                    setState(() {
+                                      //Current value of the drop down button
+                                      convertedToVal = newValue!;
+                                    });
+                                  },
                                 ),
-                                onChanged: (String? newValue) {
-                                  setState(() {
-                                    convertFromVal = newValue!;
-                                  });
-                                },
+                              ),
+                            ),
+                            const SizedBox(height: 35,),
+                            Text(
+                              resultVal.toString(),
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                                color: Colors.black45,
                               ),
                             ),
                           ],
                         ),
                       ),
                     ],
+                  ),
+                  const SizedBox(height: 20,),
+                  ElevatedButton(
+                    style: ButtonStyle(
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                      ),
+                    ),
+                    onPressed: () {
+                      var lengthInput = firstConversion.text.toString();
+
+                      String km = lengthItems[0];
+                      String m = lengthItems[1];
+                      String cm = lengthItems[2];
+                      String mm = lengthItems[3];
+                      String um = lengthItems[4];
+                      String nm = lengthItems[5];
+                      String mi = lengthItems[6];
+                      String yard = lengthItems[7];
+                      String ft = lengthItems[8];
+                      String inch = lengthItems[9];
+                      String nauticalMile = lengthItems[10];
+
+                      if (lengthInput!='') {
+                        var lengthInputVal = double.parse(lengthInput);
+
+                        if (convertFromVal == convertedToVal) { resultVal = lengthInputVal * 1; }
+
+                        ///From KM to other units
+                        else if (convertFromVal==km && convertedToVal==m) { resultVal = lengthInputVal * 1000; }
+                        else if (convertFromVal==km && convertedToVal==cm) { resultVal = lengthInputVal * 100000; }
+                        else if (convertFromVal==km && convertedToVal==mm) { resultVal = lengthInputVal * 1000000; }
+                        else if (convertFromVal==km && convertedToVal==um) { resultVal = lengthInputVal * 1000000000; }
+                        else if (convertFromVal==km && convertedToVal==nm) { resultVal = lengthInputVal * 1000000000000; }
+                        else if (convertFromVal==km && convertedToVal==mi) { resultVal = lengthInputVal/1.609; }
+                        else if (convertFromVal==km && convertedToVal==yard) { resultVal = lengthInputVal * 1094; }
+                        else if (convertFromVal==km && convertedToVal==ft) { resultVal = lengthInputVal * 3281; }
+                        else if (convertFromVal==km && convertedToVal==inch) { resultVal = lengthInputVal * 39370; }
+                        else if (convertFromVal==km && convertedToVal==nauticalMile) { resultVal = lengthInputVal/1.852; }
+                        ///----------------------
+
+                        ///From M to other units
+                        else if (convertFromVal==m && convertedToVal==km) { resultVal = lengthInputVal/1000; }
+                        else if (convertFromVal==m && convertedToVal==cm) { resultVal = lengthInputVal * 100; }
+                        else if (convertFromVal==m && convertedToVal==mm) { resultVal = lengthInputVal * 1000; }
+                        else if (convertFromVal==m && convertedToVal==um) { resultVal = lengthInputVal * 1000000; }
+                        else if (convertFromVal==m && convertedToVal==nm) { resultVal = lengthInputVal * 1000000000; }
+                        else if (convertFromVal==m && convertedToVal==mi) { resultVal = lengthInputVal/1609; }
+                        else if (convertFromVal==m && convertedToVal==yard) { resultVal = lengthInputVal * 1.094; }
+                        else if (convertFromVal==m && convertedToVal==ft) { resultVal = lengthInputVal * 3.281; }
+                        else if (convertFromVal==m && convertedToVal==inch) { resultVal = lengthInputVal * 39.37; }
+                        else if (convertFromVal==m && convertedToVal==nauticalMile) { resultVal = lengthInputVal/1852; }
+                        ///----------------------
+
+                        ///From CM to other units
+                        else if (convertFromVal==cm && convertedToVal==km) { resultVal = lengthInputVal/100000; }
+                        else if (convertFromVal==cm && convertedToVal==m) { resultVal = lengthInputVal/100; }
+                        else if (convertFromVal==cm && convertedToVal==mm) { resultVal = lengthInputVal * 10; }
+                        else if (convertFromVal==cm && convertedToVal==um) { resultVal = lengthInputVal * 10000; }
+                        else if (convertFromVal==cm && convertedToVal==nm) { resultVal = lengthInputVal * 10000000; }
+                        else if (convertFromVal==cm && convertedToVal==mi) { resultVal = lengthInputVal/160900; }
+                        else if (convertFromVal==cm && convertedToVal==yard) { resultVal = lengthInputVal * 91.44; }
+                        else if (convertFromVal==cm && convertedToVal==ft) { resultVal = lengthInputVal * 30.48; }
+                        else if (convertFromVal==cm && convertedToVal==inch) { resultVal = lengthInputVal * 2.54; }
+                        else if (convertFromVal==cm && convertedToVal==nauticalMile) { resultVal = lengthInputVal/185200; }
+                        ///----------------------
+
+                        setState(() {
+                          resultVal;
+                        });
+                      }
+                    },
+                    child: const Text(
+                      'Calculate',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 10,),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        firstConversion.clear();
+                        secondConversion.clear();
+                        resultVal = 0.0;
+                      });
+                    },
+                    child: const Text(
+                      'Clear',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w700,
+                        color: Colors.redAccent,
+                        fontSize: 17,
+                        decoration: TextDecoration.underline,
+                      ),
+                    ),
                   ),
                 ],
               ),
