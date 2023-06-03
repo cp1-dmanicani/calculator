@@ -1465,9 +1465,9 @@ class _LengthConversion extends State<LengthConversion> {
                         ///From KM to other units
                         else if (convertFromVal==km && convertedToVal==m) { resultVal = lengthInputVal * 1000; }
                         else if (convertFromVal==km && convertedToVal==cm) { resultVal = lengthInputVal * 100000; }
-                        else if (convertFromVal==km && convertedToVal==mm) { resultVal = lengthInputVal * 1000000; }
-                        else if (convertFromVal==km && convertedToVal==um) { resultVal = lengthInputVal * 1000000000; }
-                        else if (convertFromVal==km && convertedToVal==nm) { resultVal = lengthInputVal * 1000000000000; }
+                        else if (convertFromVal==km && convertedToVal==mm) { resultVal = lengthInputVal * 1e+6; }
+                        else if (convertFromVal==km && convertedToVal==um) { resultVal = lengthInputVal * 1e+9; }
+                        else if (convertFromVal==km && convertedToVal==nm) { resultVal = lengthInputVal * 1e+12; }
                         else if (convertFromVal==km && convertedToVal==mi) { resultVal = lengthInputVal/1.609; }
                         else if (convertFromVal==km && convertedToVal==yard) { resultVal = lengthInputVal * 1094; }
                         else if (convertFromVal==km && convertedToVal==ft) { resultVal = lengthInputVal * 3281; }
@@ -1479,8 +1479,8 @@ class _LengthConversion extends State<LengthConversion> {
                         else if (convertFromVal==m && convertedToVal==km) { resultVal = lengthInputVal/1000; }
                         else if (convertFromVal==m && convertedToVal==cm) { resultVal = lengthInputVal * 100; }
                         else if (convertFromVal==m && convertedToVal==mm) { resultVal = lengthInputVal * 1000; }
-                        else if (convertFromVal==m && convertedToVal==um) { resultVal = lengthInputVal * 1000000; }
-                        else if (convertFromVal==m && convertedToVal==nm) { resultVal = lengthInputVal * 1000000000; }
+                        else if (convertFromVal==m && convertedToVal==um) { resultVal = lengthInputVal * 1e+6; }
+                        else if (convertFromVal==m && convertedToVal==nm) { resultVal = lengthInputVal * 1e+9; }
                         else if (convertFromVal==m && convertedToVal==mi) { resultVal = lengthInputVal/1609; }
                         else if (convertFromVal==m && convertedToVal==yard) { resultVal = lengthInputVal * 1.094; }
                         else if (convertFromVal==m && convertedToVal==ft) { resultVal = lengthInputVal * 3.281; }
@@ -1493,12 +1493,116 @@ class _LengthConversion extends State<LengthConversion> {
                         else if (convertFromVal==cm && convertedToVal==m) { resultVal = lengthInputVal/100; }
                         else if (convertFromVal==cm && convertedToVal==mm) { resultVal = lengthInputVal * 10; }
                         else if (convertFromVal==cm && convertedToVal==um) { resultVal = lengthInputVal * 10000; }
-                        else if (convertFromVal==cm && convertedToVal==nm) { resultVal = lengthInputVal * 10000000; }
+                        else if (convertFromVal==cm && convertedToVal==nm) { resultVal = lengthInputVal * 1e+7; }
                         else if (convertFromVal==cm && convertedToVal==mi) { resultVal = lengthInputVal/160900; }
-                        else if (convertFromVal==cm && convertedToVal==yard) { resultVal = lengthInputVal * 91.44; }
-                        else if (convertFromVal==cm && convertedToVal==ft) { resultVal = lengthInputVal * 30.48; }
-                        else if (convertFromVal==cm && convertedToVal==inch) { resultVal = lengthInputVal * 2.54; }
+                        else if (convertFromVal==cm && convertedToVal==yard) { resultVal = lengthInputVal/91.44; }
+                        else if (convertFromVal==cm && convertedToVal==ft) { resultVal = lengthInputVal/30.48; }
+                        else if (convertFromVal==cm && convertedToVal==inch) { resultVal = lengthInputVal/2.54; }
                         else if (convertFromVal==cm && convertedToVal==nauticalMile) { resultVal = lengthInputVal/185200; }
+                        ///----------------------
+
+                        ///From MM to other units
+                        else if (convertFromVal==mm && convertedToVal==km) { resultVal = lengthInputVal/1e+6; }
+                        else if (convertFromVal==mm && convertedToVal==m) { resultVal = lengthInputVal/1000; }
+                        else if (convertFromVal==mm && convertedToVal==cm) { resultVal = lengthInputVal/10; }
+                        else if (convertFromVal==mm && convertedToVal==um) { resultVal = lengthInputVal * 1000; }
+                        else if (convertFromVal==mm && convertedToVal==nm) { resultVal = lengthInputVal * 1e+6; }
+                        else if (convertFromVal==mm && convertedToVal==mi) { resultVal = lengthInputVal/1.609e+6; }
+                        else if (convertFromVal==mm && convertedToVal==yard) { resultVal = lengthInputVal/914.4; }
+                        else if (convertFromVal==mm && convertedToVal==ft) { resultVal = lengthInputVal/304.8; }
+                        else if (convertFromVal==mm && convertedToVal==inch) { resultVal = lengthInputVal/25.4; }
+                        else if (convertFromVal==mm && convertedToVal==nauticalMile) { resultVal = lengthInputVal/1.852e+6; }
+                        ///----------------------
+
+                        ///From uM to other units
+                        else if (convertFromVal==um && convertedToVal==km) { resultVal = lengthInputVal/1e+9; }
+                        else if (convertFromVal==um && convertedToVal==m) { resultVal = lengthInputVal/1e+6; }
+                        else if (convertFromVal==um && convertedToVal==cm) { resultVal = lengthInputVal/10000; }
+                        else if (convertFromVal==um && convertedToVal==mm) { resultVal = lengthInputVal/1000; }
+                        else if (convertFromVal==um && convertedToVal==nm) { resultVal = lengthInputVal * 1000; }
+                        else if (convertFromVal==um && convertedToVal==mi) { resultVal = lengthInputVal/1.609e+9; }
+                        else if (convertFromVal==um && convertedToVal==yard) { resultVal = lengthInputVal/914400; }
+                        else if (convertFromVal==um && convertedToVal==ft) { resultVal = lengthInputVal/304800; }
+                        else if (convertFromVal==um && convertedToVal==inch) { resultVal = lengthInputVal/25400; }
+                        else if (convertFromVal==um && convertedToVal==nauticalMile) { resultVal = lengthInputVal/1.852e+9; }
+                        ///----------------------
+
+                        ///From NM to other units
+                        else if (convertFromVal==nm && convertedToVal==km) { resultVal = lengthInputVal/1e+12; }
+                        else if (convertFromVal==nm && convertedToVal==m) { resultVal = lengthInputVal/1e+9; }
+                        else if (convertFromVal==nm && convertedToVal==cm) { resultVal = lengthInputVal/1e+7; }
+                        else if (convertFromVal==nm && convertedToVal==mm) { resultVal = lengthInputVal/1e+6; }
+                        else if (convertFromVal==nm && convertedToVal==um) { resultVal = lengthInputVal/1000; }
+                        else if (convertFromVal==nm && convertedToVal==mi) { resultVal = lengthInputVal/1.609e+12; }
+                        else if (convertFromVal==nm && convertedToVal==yard) { resultVal = lengthInputVal/9.144e+8; }
+                        else if (convertFromVal==nm && convertedToVal==ft) { resultVal = lengthInputVal/3.048e+8; }
+                        else if (convertFromVal==nm && convertedToVal==inch) { resultVal = lengthInputVal/2.54e+7; }
+                        else if (convertFromVal==nm && convertedToVal==nauticalMile) { resultVal = lengthInputVal/1.852e+12; }
+                        ///----------------------
+
+                        ///From Mi to other units
+                        else if (convertFromVal==mi && convertedToVal==km) { resultVal = lengthInputVal * 1.609; }
+                        else if (convertFromVal==mi && convertedToVal==m) { resultVal = lengthInputVal * 1609; }
+                        else if (convertFromVal==mi && convertedToVal==cm) { resultVal = lengthInputVal * 160900; }
+                        else if (convertFromVal==mi && convertedToVal==mm) { resultVal = lengthInputVal * 1.609e+6; }
+                        else if (convertFromVal==mi && convertedToVal==um) { resultVal = lengthInputVal * 1.609e+9; }
+                        else if (convertFromVal==mi && convertedToVal==nm) { resultVal = lengthInputVal * 1.609e+12; }
+                        else if (convertFromVal==mi && convertedToVal==yard) { resultVal = lengthInputVal * 1760; }
+                        else if (convertFromVal==mi && convertedToVal==ft) { resultVal = lengthInputVal * 5280; }
+                        else if (convertFromVal==mi && convertedToVal==inch) { resultVal = lengthInputVal * 63360; }
+                        else if (convertFromVal==mi && convertedToVal==nauticalMile) { resultVal = lengthInputVal/1.151; }
+                        ///----------------------
+
+                        ///From Yd to other units
+                        else if (convertFromVal==yard && convertedToVal==km) { resultVal = lengthInputVal/1094; }
+                        else if (convertFromVal==yard && convertedToVal==m) { resultVal = lengthInputVal/1.094; }
+                        else if (convertFromVal==yard && convertedToVal==cm) { resultVal = lengthInputVal * 91.44; }
+                        else if (convertFromVal==yard && convertedToVal==mm) { resultVal = lengthInputVal * 914.4; }
+                        else if (convertFromVal==yard && convertedToVal==um) { resultVal = lengthInputVal * 914400; }
+                        else if (convertFromVal==yard && convertedToVal==nm) { resultVal = lengthInputVal * 9.144e+8; }
+                        else if (convertFromVal==yard && convertedToVal==mi) { resultVal = lengthInputVal/1760; }
+                        else if (convertFromVal==yard && convertedToVal==ft) { resultVal = lengthInputVal * 3; }
+                        else if (convertFromVal==yard && convertedToVal==inch) { resultVal = lengthInputVal * 36; }
+                        else if (convertFromVal==yard && convertedToVal==nauticalMile) { resultVal = lengthInputVal/2025; }
+                        ///----------------------
+
+                        ///From Ft to other units
+                        else if (convertFromVal==ft && convertedToVal==km) { resultVal = lengthInputVal/3281; }
+                        else if (convertFromVal==ft && convertedToVal==m) { resultVal = lengthInputVal/3.281; }
+                        else if (convertFromVal==ft && convertedToVal==cm) { resultVal = lengthInputVal * 30.48; }
+                        else if (convertFromVal==ft && convertedToVal==mm) { resultVal = lengthInputVal * 304.8; }
+                        else if (convertFromVal==ft && convertedToVal==um) { resultVal = lengthInputVal * 304800; }
+                        else if (convertFromVal==ft && convertedToVal==nm) { resultVal = lengthInputVal * 3.048e+8; }
+                        else if (convertFromVal==ft && convertedToVal==mi) { resultVal = lengthInputVal/5280; }
+                        else if (convertFromVal==ft && convertedToVal==yard) { resultVal = lengthInputVal/3; }
+                        else if (convertFromVal==ft && convertedToVal==inch) { resultVal = lengthInputVal * 12; }
+                        else if (convertFromVal==ft && convertedToVal==nauticalMile) { resultVal = lengthInputVal/6076; }
+                        ///----------------------
+
+                        ///From In to other units
+                        else if (convertFromVal==inch && convertedToVal==km) { resultVal = lengthInputVal/39370; }
+                        else if (convertFromVal==inch && convertedToVal==m) { resultVal = lengthInputVal/39.37; }
+                        else if (convertFromVal==inch && convertedToVal==cm) { resultVal = lengthInputVal * 2.54; }
+                        else if (convertFromVal==inch && convertedToVal==mm) { resultVal = lengthInputVal * 25.4; }
+                        else if (convertFromVal==inch && convertedToVal==um) { resultVal = lengthInputVal * 25400; }
+                        else if (convertFromVal==inch && convertedToVal==nm) { resultVal = lengthInputVal * 2.54e+7; }
+                        else if (convertFromVal==inch && convertedToVal==mi) { resultVal = lengthInputVal/63360; }
+                        else if (convertFromVal==inch && convertedToVal==yard) { resultVal = lengthInputVal/36; }
+                        else if (convertFromVal==inch && convertedToVal==ft) { resultVal = lengthInputVal/12; }
+                        else if (convertFromVal==inch && convertedToVal==nauticalMile) { resultVal = lengthInputVal/72910; }
+                        ///----------------------
+
+                        ///From Naut. Mile to other units
+                        else if (convertFromVal==nauticalMile && convertedToVal==km) { resultVal = lengthInputVal * 1.852; }
+                        else if (convertFromVal==nauticalMile && convertedToVal==m) { resultVal = lengthInputVal * 1852; }
+                        else if (convertFromVal==nauticalMile && convertedToVal==cm) { resultVal = lengthInputVal * 185200; }
+                        else if (convertFromVal==nauticalMile && convertedToVal==mm) { resultVal = lengthInputVal * 1.852e+6; }
+                        else if (convertFromVal==nauticalMile && convertedToVal==um) { resultVal = lengthInputVal * 1.852e+9; }
+                        else if (convertFromVal==nauticalMile && convertedToVal==nm) { resultVal = lengthInputVal * 1.852e+12; }
+                        else if (convertFromVal==nauticalMile && convertedToVal==mi) { resultVal = lengthInputVal * 1.151; }
+                        else if (convertFromVal==nauticalMile && convertedToVal==yard) { resultVal = lengthInputVal * 2025; }
+                        else if (convertFromVal==nauticalMile && convertedToVal==ft) { resultVal = lengthInputVal * 6076; }
+                        else if (convertFromVal==nauticalMile && convertedToVal==inch) { resultVal = lengthInputVal * 72910; }
                         ///----------------------
 
                         setState(() {
