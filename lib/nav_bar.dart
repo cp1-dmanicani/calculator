@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:calculator/other_conversions.dart';
 
@@ -27,9 +28,11 @@ class NavBar extends StatelessWidget {
             leading: const Icon(Icons.science),
             title: const Text('Scientific'),
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const Scientific()),
+              Navigator.of(context, rootNavigator: true).push(
+                CupertinoPageRoute<bool>(
+                  fullscreenDialog: true,
+                  builder: (BuildContext context) => Scientific(),
+                ),
               );
             },
           ),
@@ -38,9 +41,11 @@ class NavBar extends StatelessWidget {
             leading: const Icon(Icons.monitor_weight),
             title: const Text('BMI'),
             onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => BMI()),
+              Navigator.of(context, rootNavigator: true).push(
+                CupertinoPageRoute<bool>(
+                  fullscreenDialog: true,
+                  builder: (BuildContext context) => BMI(),
+                ),
               );
             },
           ),
@@ -48,9 +53,11 @@ class NavBar extends StatelessWidget {
             leading: const Icon(Icons.person_3),
             title: const Text('Body Fat'),
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => BodyFatCalculation()),
+              Navigator.of(context, rootNavigator: true).push(
+                CupertinoPageRoute<bool>(
+                  fullscreenDialog: true,
+                  builder: (BuildContext context) => BodyFatCalculation(),
+                ),
               );
             },
           ),
@@ -58,9 +65,11 @@ class NavBar extends StatelessWidget {
             leading: const Icon(Icons.fastfood),
             title: const Text('BMR (Basal Metabolic Rate)'),
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => BMRCalculation()),
+              Navigator.of(context, rootNavigator: true).push(
+                CupertinoPageRoute<bool>(
+                  fullscreenDialog: true,
+                  builder: (BuildContext context) => BMRCalculation(),
+                ),
               );
             },
           ),
@@ -69,9 +78,11 @@ class NavBar extends StatelessWidget {
             leading: const Icon(Icons.height),
             title: const Text('Length'),
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const LengthConversion()),
+              Navigator.of(context, rootNavigator: true).push(
+                CupertinoPageRoute<bool>(
+                  fullscreenDialog: true,
+                  builder: (BuildContext context) => LengthConversion(),
+                ),
               );
             },
           ),
@@ -79,9 +90,11 @@ class NavBar extends StatelessWidget {
             leading: const Icon(Icons.scale),
             title: const Text('Weight'),
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const WeightConv()),
+              Navigator.of(context, rootNavigator: true).push(
+                CupertinoPageRoute<bool>(
+                  fullscreenDialog: true,
+                  builder: (BuildContext context) => WeightConversion(),
+                ),
               );
             },
           ),
@@ -89,9 +102,11 @@ class NavBar extends StatelessWidget {
             leading: const Icon(Icons.severe_cold),
             title: const Text('Temperature'),
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const TemperatureConv()),
+              Navigator.of(context, rootNavigator: true).push(
+                CupertinoPageRoute<bool>(
+                  fullscreenDialog: true,
+                  builder: (BuildContext context) => TemperatureConv(),
+                ),
               );
             },
           ),
@@ -100,9 +115,11 @@ class NavBar extends StatelessWidget {
             leading: const Icon(Icons.money),
             title: const Text('Fiat (Currency)'),
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const CurrencyConv()),
+              Navigator.of(context, rootNavigator: true).push(
+                CupertinoPageRoute<bool>(
+                  fullscreenDialog: true,
+                  builder: (BuildContext context) => CurrencyConv(),
+                ),
               );
             },
           ),
@@ -110,9 +127,11 @@ class NavBar extends StatelessWidget {
             title: const Text('Cryptocurrency'),
             leading: const Icon(Icons.currency_bitcoin),
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const FiatToCryptoConv()),
+              Navigator.of(context, rootNavigator: true).push(
+                CupertinoPageRoute<bool>(
+                  fullscreenDialog: true,
+                  builder: (BuildContext context) => FiatToCryptoConv(),
+                ),
               );
             },
           ),

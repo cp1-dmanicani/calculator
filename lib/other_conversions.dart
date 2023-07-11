@@ -17,11 +17,8 @@ class _Scientific extends State<Scientific> {
       appBar: AppBar(
         backgroundColor: const Color(0xFF1d2630),
         title: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: const [
-            SizedBox(
-              width: 10,
-            ),
             Text(
               'Scientific Calculator',
               style: TextStyle(color: Colors.white),
@@ -57,10 +54,11 @@ class _BMI extends State<BMI> {
       appBar: AppBar(
         backgroundColor: const Color(0xFF1d2630),
         title: const Row(
-          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            SizedBox(
-              width: 10,
+            Text(
+              'BMI Calculator',
+              style: TextStyle(color: Colors.white),
             ),
           ],
         ),
@@ -79,14 +77,6 @@ class _BMI extends State<BMI> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
-                    'BMI',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 40,
-                    ),
-                  ),
                   const SizedBox(
                     height: 35,
                   ),
@@ -297,11 +287,15 @@ class _BodyFatCalculation extends State<BodyFatCalculation> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFF1d2630),
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: const [
-            SizedBox(
-              width: 10,
+        title: const Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Text(
+              'Body Fat Calculator',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold
+              ),
             ),
           ],
         ),
@@ -320,16 +314,7 @@ class _BodyFatCalculation extends State<BodyFatCalculation> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  const Text(
-                    'Body Fat Calculation',
-                    textAlign: TextAlign.justify,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                      fontSize: 35,
-                    ),
-                  ),
-                  SizedBox(height: 10,),
+                  const SizedBox(height: 10,),
                   const Text(
                       'Your Gender',
                     style: TextStyle(
@@ -834,6 +819,18 @@ class _BMRCalculation extends State<BMRCalculation> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFF1d2630),
+        title: const Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Text(
+              'BMR Calculator',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold
+              ),
+            ),
+          ],
+        ),
         leading: const BackButton(
           color: Colors.white,
         ),
@@ -848,16 +845,7 @@ class _BMRCalculation extends State<BMRCalculation> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  const Text(
-                    'BMR Calculation',
-                    textAlign: TextAlign.justify,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                      fontSize: 35,
-                    ),
-                  ),
-                  SizedBox(height: 10,),
+                  const SizedBox(height: 10,),
                   const Text(
                     'Your Gender',
                     style: TextStyle(
@@ -1242,6 +1230,18 @@ class _LengthConversion extends State<LengthConversion> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFF1d2630),
+        title: const Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Text(
+              'Length Conversion',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold
+              ),
+            ),
+          ],
+        ),
         leading: const BackButton(
           color: Colors.white,
         ),
@@ -1255,15 +1255,6 @@ class _LengthConversion extends State<LengthConversion> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  const Text(
-                    'Length Conversion',
-                    textAlign: TextAlign.justify,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                      fontSize: 35,
-                    ),
-                  ),
                   const SizedBox(
                     height: 20,
                   ),
@@ -1330,7 +1321,7 @@ class _LengthConversion extends State<LengthConversion> {
                                 ),
                               ),
                             ),
-                            const SizedBox(height: 20,),
+                            const SizedBox(height: 32,),
                             TextField(
                               controller: firstConversion,
                               textAlign: TextAlign.center,
@@ -1421,7 +1412,7 @@ class _LengthConversion extends State<LengthConversion> {
                             ),
                             const SizedBox(height: 35,),
                             Text(
-                              resultVal.toString(),
+                              resultVal.toStringAsFixed(2),
                               style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20,
@@ -1647,29 +1638,419 @@ class _LengthConversion extends State<LengthConversion> {
   }
 }
 
+class WeightConversion extends StatefulWidget {
+  const WeightConversion({super.key});
+  @override
+  State<StatefulWidget> createState() => _WeightConv();
+}
+
 ///Class for Weight conversions
-class WeightConv extends StatelessWidget {
-  const WeightConv({super.key});
+class _WeightConv extends State<WeightConversion> {
+  TextEditingController firstConversion = TextEditingController();
+  TextEditingController secondConversion = TextEditingController();
+
+  var valA = '';
+  double resultVal = 0.0;
+
+  String convertFromVal = '';
+  String convertedToVal = '';
+
+  List<String> lengthItems = [
+    'Tonne',
+    'Kilogram',
+    'Gram',
+    'Milligram',
+    'Microgram',
+    'Imperial ton',
+    'US ton',
+    'Stone',
+    'Pound',
+    'Ounce',
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFF1d2630),
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: const [
-            SizedBox(
-              width: 10,
-            ),
+        title: const Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
             Text(
               'Weight Conversion',
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold
+              ),
             ),
           ],
         ),
         leading: const BackButton(
           color: Colors.white,
+        ),
+      ),
+      body: Container(
+        color: Colors.white,
+        padding: EdgeInsets.all(20.0),
+        child: Center(
+          child: SizedBox(
+            width: 350,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Column(
+                    children: [
+                      Container(
+                        height: 200,
+                        width: 350,
+                        padding: const EdgeInsets.all(5.0),
+                        decoration: BoxDecoration(
+                          border: Border.all(width: 5, color: Colors.black45),
+                          borderRadius: BorderRadius.all(Radius.circular(25)),
+                        ),
+                        child: Column(
+                          children: [
+                            const Text(
+                              'Convert from :',
+                              style: TextStyle(
+                                fontSize: 15,
+                                color: Colors.black87,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              textAlign: TextAlign.start,
+                            ),
+                            const SizedBox(height: 15,),
+                            SizedBox(
+                              child: Container(
+                                width: 150,
+                                height: 50,
+                                child: DropdownButtonFormField<String>(
+                                  isExpanded: true,
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.black45,
+                                  ),
+                                  items: lengthItems.map<DropdownMenuItem<String>>((String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Center(
+                                        child: Text(
+                                          value,
+                                          style: const TextStyle(
+                                            fontSize: 20,
+                                            color: Colors.black45,),
+                                        ),
+                                      ),
+                                    );
+                                  }).toList(),
+                                  hint: const Align(
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      'Units',
+                                      style: TextStyle(
+                                        fontSize: 17,
+                                        color: Colors.black45,),
+                                    ),
+                                  ),
+                                  onChanged: (String? newValue) {
+                                    setState(() {
+                                      //Current value of the drop down button
+                                      convertFromVal = newValue!;
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 32,),
+                            TextField(
+                              controller: firstConversion,
+                              textAlign: TextAlign.center,
+                              decoration: InputDecoration(
+                                border: myInputBorder(),
+                                enabledBorder: myInputBorder(),
+                                label: const Center(
+                                  child: Text(
+                                    'Enter Value',
+                                    style: TextStyle(fontSize: 16, color: Colors.black38),
+                                  ),
+                                ),
+                              ),
+                              style: const TextStyle(
+                                  color: Colors.black45,
+                                  fontSize: 20
+                              ),
+                              keyboardType: TextInputType.number,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 25,),
+                  Column(
+                    children: [
+                      Container(
+                        height: 200,
+                        width: 350,
+                        padding: const EdgeInsets.all(5.0),
+                        decoration: BoxDecoration(
+                          border: Border.all(width: 5, color: Colors.black45),
+                          borderRadius: BorderRadius.all(Radius.circular(25)),
+                        ),
+                        child: Column(
+                          children: [
+                            const Text(
+                              'Convert to :',
+                              style: TextStyle(
+                                fontSize: 15,
+                                color: Colors.black87,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              textAlign: TextAlign.start,
+                            ),
+                            const SizedBox(height: 15,),
+                            SizedBox(
+                              child: Container(
+                                width: 150,
+                                height: 50,
+                                child: DropdownButtonFormField<String>(
+                                  isExpanded: true,
+                                  style: const TextStyle(
+                                    fontSize: 17,
+                                    color: Colors.black45,
+                                  ),
+                                  items: lengthItems.map<DropdownMenuItem<String>>((String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Center(
+                                        child: Text(
+                                          value,
+                                          style: const TextStyle(
+                                            fontSize: 20,
+                                            color: Colors.black45,),
+                                        ),
+                                      ),
+                                    );
+                                  }).toList(),
+                                  hint: const Align(
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      'Units',
+                                      style: TextStyle(
+                                        fontSize: 17,
+                                        color: Colors.black45,),
+                                    ),
+                                  ),
+                                  onChanged: (String? newValue) {
+                                    setState(() {
+                                      //Current value of the drop down button
+                                      convertedToVal = newValue!;
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 35,),
+                            Text(
+                              resultVal.toStringAsFixed(2),
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                                color: Colors.black45,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 20,),
+                  ElevatedButton(
+                    style: ButtonStyle(
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                      ),
+                    ),
+                    onPressed: () {
+                      var lengthInput = firstConversion.text.toString();
+
+                      String tonne = lengthItems[0];
+                      String kg = lengthItems[1];
+                      String g = lengthItems[2];
+                      String mg = lengthItems[3];
+                      String ug = lengthItems[4];
+                      String impTon = lengthItems[5];
+                      String usTon = lengthItems[6];
+                      String stone = lengthItems[7];
+                      String lb = lengthItems[8];
+                      String oz = lengthItems[9];
+
+                      if (lengthInput!='') {
+                        var lengthInputVal = double.parse(lengthInput);
+
+                        if (convertFromVal == convertedToVal) { resultVal = lengthInputVal * 1; }
+
+                        ///From tonne to other units
+                        else if (convertFromVal==tonne && convertedToVal==kg) { resultVal = lengthInputVal * 1000; }
+                        else if (convertFromVal==tonne && convertedToVal==g) { resultVal = lengthInputVal * 1e+6; }
+                        else if (convertFromVal==tonne && convertedToVal==mg) { resultVal = lengthInputVal * 1e+9; }
+                        else if (convertFromVal==tonne && convertedToVal==ug) { resultVal = lengthInputVal * 1e+12; }
+                        else if (convertFromVal==tonne && convertedToVal==impTon) { resultVal = lengthInputVal/1.016; }
+                        else if (convertFromVal==tonne && convertedToVal==usTon) { resultVal = lengthInputVal * 1.102; }
+                        else if (convertFromVal==tonne && convertedToVal==stone) { resultVal = lengthInputVal * 157.5; }
+                        else if (convertFromVal==tonne && convertedToVal==lb) { resultVal = lengthInputVal * 2205; }
+                        else if (convertFromVal==tonne && convertedToVal==oz) { resultVal = lengthInputVal * 35270; }
+                        ///----------------------
+
+                        ///From kg to other units
+                        else if (convertFromVal==kg && convertedToVal==tonne) { resultVal = lengthInputVal/1000; }
+                        else if (convertFromVal==kg && convertedToVal==g) { resultVal = lengthInputVal * 1000; }
+                        else if (convertFromVal==kg && convertedToVal==mg) { resultVal = lengthInputVal * 1e+6; }
+                        else if (convertFromVal==kg && convertedToVal==ug) { resultVal = lengthInputVal * 1e+9; }
+                        else if (convertFromVal==kg && convertedToVal==impTon) { resultVal = lengthInputVal/1016; }
+                        else if (convertFromVal==kg && convertedToVal==usTon) { resultVal = lengthInputVal/907.2; }
+                        else if (convertFromVal==kg && convertedToVal==stone) { resultVal = lengthInputVal/6.35; }
+                        else if (convertFromVal==kg && convertedToVal==lb) { resultVal = lengthInputVal * 2.205; }
+                        else if (convertFromVal==kg && convertedToVal==oz) { resultVal = lengthInputVal * 35.274; }
+                        ///----------------------
+
+                        ///From gram to other units
+                        else if (convertFromVal==g && convertedToVal==tonne) { resultVal = lengthInputVal/1e+6; }
+                        else if (convertFromVal==g && convertedToVal==kg) { resultVal = lengthInputVal/1000; }
+                        else if (convertFromVal==g && convertedToVal==mg) { resultVal = lengthInputVal * 1000; }
+                        else if (convertFromVal==g && convertedToVal==ug) { resultVal = lengthInputVal * 1e+6; }
+                        else if (convertFromVal==g && convertedToVal==impTon) { resultVal = lengthInputVal/1.016e+6; }
+                        else if (convertFromVal==g && convertedToVal==usTon) { resultVal = lengthInputVal/907200; }
+                        else if (convertFromVal==g && convertedToVal==stone) { resultVal = lengthInputVal/6350; }
+                        else if (convertFromVal==g && convertedToVal==lb) { resultVal = lengthInputVal/453.6; }
+                        else if (convertFromVal==g && convertedToVal==oz) { resultVal = lengthInputVal/28.35; }
+                        ///----------------------
+
+                        ///From milligram to other units
+                        else if (convertFromVal==mg && convertedToVal==tonne) { resultVal = lengthInputVal/1e+9; }
+                        else if (convertFromVal==mg && convertedToVal==kg) { resultVal = lengthInputVal/1e+6; }
+                        else if (convertFromVal==mg && convertedToVal==g) { resultVal = lengthInputVal/1000; }
+                        else if (convertFromVal==mg && convertedToVal==ug) { resultVal = lengthInputVal * 1000; }
+                        else if (convertFromVal==mg && convertedToVal==impTon) { resultVal = lengthInputVal * 1.016e+9; }
+                        else if (convertFromVal==mg && convertedToVal==usTon) { resultVal = lengthInputVal/9.072e+8; }
+                        else if (convertFromVal==mg && convertedToVal==stone) { resultVal = lengthInputVal/6.35e+6; }
+                        else if (convertFromVal==mg && convertedToVal==lb) { resultVal = lengthInputVal/453600; }
+                        else if (convertFromVal==mg && convertedToVal==oz) { resultVal = lengthInputVal/28350; }
+                        ///----------------------
+
+                        ///From microgram to other units
+                        else if (convertFromVal==ug && convertedToVal==tonne) { resultVal = lengthInputVal/1e+12; }
+                        else if (convertFromVal==ug && convertedToVal==kg) { resultVal = lengthInputVal/1e+9; }
+                        else if (convertFromVal==ug && convertedToVal==g) { resultVal = lengthInputVal/1e+6; }
+                        else if (convertFromVal==ug && convertedToVal==mg) { resultVal = lengthInputVal/1000; }
+                        else if (convertFromVal==ug && convertedToVal==impTon) { resultVal = lengthInputVal/1.016e+12; }
+                        else if (convertFromVal==ug && convertedToVal==usTon) { resultVal = lengthInputVal/9.072e+11; }
+                        else if (convertFromVal==ug && convertedToVal==stone) { resultVal = lengthInputVal/6.35e+9; }
+                        else if (convertFromVal==ug && convertedToVal==lb) { resultVal = lengthInputVal/4.536e+8; }
+                        else if (convertFromVal==ug && convertedToVal==oz) { resultVal = lengthInputVal/2.835e+7; }
+                        ///----------------------
+
+                        ///From imperial ton to other units
+                        else if (convertFromVal==impTon && convertedToVal==tonne) { resultVal = lengthInputVal * 1.016; }
+                        else if (convertFromVal==impTon && convertedToVal==kg) { resultVal = lengthInputVal * 1016; }
+                        else if (convertFromVal==impTon && convertedToVal==g) { resultVal = lengthInputVal * 1.016e+6; }
+                        else if (convertFromVal==impTon && convertedToVal==mg) { resultVal = lengthInputVal * 1.016e+9; }
+                        else if (convertFromVal==impTon && convertedToVal==ug) { resultVal = lengthInputVal * 1.016e+12; }
+                        else if (convertFromVal==impTon && convertedToVal==usTon) { resultVal = lengthInputVal * 1.12; }
+                        else if (convertFromVal==impTon && convertedToVal==stone) { resultVal = lengthInputVal * 160; }
+                        else if (convertFromVal==impTon && convertedToVal==lb) { resultVal = lengthInputVal * 2240; }
+                        else if (convertFromVal==impTon && convertedToVal==oz) { resultVal = lengthInputVal * 35840; }
+                        ///----------------------
+
+                        ///From US ton to other units
+                        else if (convertFromVal==usTon && convertedToVal==tonne) { resultVal = lengthInputVal/1.102; }
+                        else if (convertFromVal==usTon && convertedToVal==kg) { resultVal = lengthInputVal * 907.2; }
+                        else if (convertFromVal==usTon && convertedToVal==g) { resultVal = lengthInputVal * 907200; }
+                        else if (convertFromVal==usTon && convertedToVal==mg) { resultVal = lengthInputVal * 9.072e+8; }
+                        else if (convertFromVal==usTon && convertedToVal==ug) { resultVal = lengthInputVal * 9.072e+11; }
+                        else if (convertFromVal==usTon && convertedToVal==impTon) { resultVal = lengthInputVal/1.12; }
+                        else if (convertFromVal==usTon && convertedToVal==stone) { resultVal = lengthInputVal * 142.9; }
+                        else if (convertFromVal==usTon && convertedToVal==lb) { resultVal = lengthInputVal * 2000; }
+                        else if (convertFromVal==usTon && convertedToVal==oz) { resultVal = lengthInputVal * 32000; }
+                        ///----------------------
+
+                        ///From stone to other units
+                        else if (convertFromVal==stone && convertedToVal==tonne) { resultVal = lengthInputVal/157.5; }
+                        else if (convertFromVal==stone && convertedToVal==kg) { resultVal = lengthInputVal * 6.35; }
+                        else if (convertFromVal==stone && convertedToVal==g) { resultVal = lengthInputVal * 6350; }
+                        else if (convertFromVal==stone && convertedToVal==mg) { resultVal = lengthInputVal * 6.35e+6; }
+                        else if (convertFromVal==stone && convertedToVal==ug) { resultVal = lengthInputVal * 6.35e+9; }
+                        else if (convertFromVal==stone && convertedToVal==impTon) { resultVal = lengthInputVal/160; }
+                        else if (convertFromVal==stone && convertedToVal==usTon) { resultVal = lengthInputVal/142.9; }
+                        else if (convertFromVal==stone && convertedToVal==lb) { resultVal = lengthInputVal * 14; }
+                        else if (convertFromVal==stone && convertedToVal==oz) { resultVal = lengthInputVal * 224; }
+                        ///----------------------
+
+                        ///From lbs to other units
+                        else if (convertFromVal==lb && convertedToVal==tonne) { resultVal = lengthInputVal/2205; }
+                        else if (convertFromVal==lb && convertedToVal==kg) { resultVal = lengthInputVal/2.205; }
+                        else if (convertFromVal==lb && convertedToVal==g) { resultVal = lengthInputVal * 453.6; }
+                        else if (convertFromVal==lb && convertedToVal==mg) { resultVal = lengthInputVal * 453600; }
+                        else if (convertFromVal==lb && convertedToVal==ug) { resultVal = lengthInputVal * 4.536e+8; }
+                        else if (convertFromVal==lb && convertedToVal==impTon) { resultVal = lengthInputVal/2240; }
+                        else if (convertFromVal==lb && convertedToVal==usTon) { resultVal = lengthInputVal/2000; }
+                        else if (convertFromVal==lb && convertedToVal==stone) { resultVal = lengthInputVal/14; }
+                        else if (convertFromVal==lb && convertedToVal==oz) { resultVal = lengthInputVal * 16; }
+                        ///----------------------
+
+                        ///From oz to other units
+                        else if (convertFromVal==oz && convertedToVal==tonne) { resultVal = lengthInputVal/35270; }
+                        else if (convertFromVal==oz && convertedToVal==kg) { resultVal = lengthInputVal/35.274; }
+                        else if (convertFromVal==oz && convertedToVal==g) { resultVal = lengthInputVal * 28.35; }
+                        else if (convertFromVal==oz && convertedToVal==mg) { resultVal = lengthInputVal * 28350; }
+                        else if (convertFromVal==oz && convertedToVal==ug) { resultVal = lengthInputVal * 2.835e+7; }
+                        else if (convertFromVal==oz && convertedToVal==impTon) { resultVal = lengthInputVal/35840; }
+                        else if (convertFromVal==oz && convertedToVal==usTon) { resultVal = lengthInputVal/32000; }
+                        else if (convertFromVal==oz && convertedToVal==stone) { resultVal = lengthInputVal/224; }
+                        else if (convertFromVal==oz && convertedToVal==lb) { resultVal = lengthInputVal/16; }
+                        ///----------------------
+
+                        setState(() {
+                          resultVal;
+                        });
+                      }
+                    },
+                    child: const Text(
+                      'Calculate',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 10,),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        firstConversion.clear();
+                        secondConversion.clear();
+                        resultVal = 0.0;
+                      });
+                    },
+                    child: const Text(
+                      'Clear',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w700,
+                        color: Colors.redAccent,
+                        fontSize: 17,
+                        decoration: TextDecoration.underline,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ),
       ),
     );
@@ -1685,15 +2066,15 @@ class TemperatureConv extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFF1d2630),
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: const [
-            SizedBox(
-              width: 10,
-            ),
+        title: const Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
             Text(
               'Temperature Conversion',
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold
+              ),
             ),
           ],
         ),
@@ -1714,15 +2095,15 @@ class CurrencyConv extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFF1d2630),
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: const [
-            SizedBox(
-              width: 10,
-            ),
+        title: const Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
             Text(
-              'Currency Conversion',
-              style: TextStyle(color: Colors.white),
+              'Fiat Conversion Calculator',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold
+              ),
             ),
           ],
         ),
@@ -1743,15 +2124,15 @@ class FiatToCryptoConv extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFF1d2630),
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: const [
-            SizedBox(
-              width: 10,
-            ),
+        title: const Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
             Text(
-              'Fiat to Crypto Conversion',
-              style: TextStyle(color: Colors.white),
+              'Fiat to Crypto Calculator',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold
+              ),
             ),
           ],
         ),
