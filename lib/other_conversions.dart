@@ -1655,7 +1655,7 @@ class _WeightConv extends State<WeightConversion> {
   String convertFromVal = '';
   String convertedToVal = '';
 
-  List<String> lengthItems = [
+  List<String> weightItems = [
     'Tonne',
     'Kilogram',
     'Gram',
@@ -1733,7 +1733,7 @@ class _WeightConv extends State<WeightConversion> {
                                     fontSize: 20,
                                     color: Colors.black45,
                                   ),
-                                  items: lengthItems.map<DropdownMenuItem<String>>((String value) {
+                                  items: weightItems.map<DropdownMenuItem<String>>((String value) {
                                     return DropdownMenuItem<String>(
                                       value: value,
                                       child: Center(
@@ -1822,7 +1822,7 @@ class _WeightConv extends State<WeightConversion> {
                                     fontSize: 17,
                                     color: Colors.black45,
                                   ),
-                                  items: lengthItems.map<DropdownMenuItem<String>>((String value) {
+                                  items: weightItems.map<DropdownMenuItem<String>>((String value) {
                                     return DropdownMenuItem<String>(
                                       value: value,
                                       child: Center(
@@ -1877,142 +1877,142 @@ class _WeightConv extends State<WeightConversion> {
                       ),
                     ),
                     onPressed: () {
-                      var lengthInput = firstConversion.text.toString();
+                      var weightInput = firstConversion.text.toString();
 
-                      String tonne = lengthItems[0];
-                      String kg = lengthItems[1];
-                      String g = lengthItems[2];
-                      String mg = lengthItems[3];
-                      String ug = lengthItems[4];
-                      String impTon = lengthItems[5];
-                      String usTon = lengthItems[6];
-                      String stone = lengthItems[7];
-                      String lb = lengthItems[8];
-                      String oz = lengthItems[9];
+                      String tonne = weightItems[0];
+                      String kg = weightItems[1];
+                      String g = weightItems[2];
+                      String mg = weightItems[3];
+                      String ug = weightItems[4];
+                      String impTon = weightItems[5];
+                      String usTon = weightItems[6];
+                      String stone = weightItems[7];
+                      String lb = weightItems[8];
+                      String oz = weightItems[9];
 
-                      if (lengthInput!='') {
-                        var lengthInputVal = double.parse(lengthInput);
+                      if (weightInput!='') {
+                        var weightInputVal = double.parse(weightInput);
 
-                        if (convertFromVal == convertedToVal) { resultVal = lengthInputVal * 1; }
+                        if (convertFromVal == convertedToVal) { resultVal = weightInputVal * 1; }
 
                         ///From tonne to other units
-                        else if (convertFromVal==tonne && convertedToVal==kg) { resultVal = lengthInputVal * 1000; }
-                        else if (convertFromVal==tonne && convertedToVal==g) { resultVal = lengthInputVal * 1e+6; }
-                        else if (convertFromVal==tonne && convertedToVal==mg) { resultVal = lengthInputVal * 1e+9; }
-                        else if (convertFromVal==tonne && convertedToVal==ug) { resultVal = lengthInputVal * 1e+12; }
-                        else if (convertFromVal==tonne && convertedToVal==impTon) { resultVal = lengthInputVal/1.016; }
-                        else if (convertFromVal==tonne && convertedToVal==usTon) { resultVal = lengthInputVal * 1.102; }
-                        else if (convertFromVal==tonne && convertedToVal==stone) { resultVal = lengthInputVal * 157.5; }
-                        else if (convertFromVal==tonne && convertedToVal==lb) { resultVal = lengthInputVal * 2205; }
-                        else if (convertFromVal==tonne && convertedToVal==oz) { resultVal = lengthInputVal * 35270; }
+                        else if (convertFromVal==tonne && convertedToVal==kg) { resultVal = weightInputVal * 1000; }
+                        else if (convertFromVal==tonne && convertedToVal==g) { resultVal = weightInputVal * 1e+6; }
+                        else if (convertFromVal==tonne && convertedToVal==mg) { resultVal = weightInputVal * 1e+9; }
+                        else if (convertFromVal==tonne && convertedToVal==ug) { resultVal = weightInputVal * 1e+12; }
+                        else if (convertFromVal==tonne && convertedToVal==impTon) { resultVal = weightInputVal/1.016; }
+                        else if (convertFromVal==tonne && convertedToVal==usTon) { resultVal = weightInputVal * 1.102; }
+                        else if (convertFromVal==tonne && convertedToVal==stone) { resultVal = weightInputVal * 157.5; }
+                        else if (convertFromVal==tonne && convertedToVal==lb) { resultVal = weightInputVal * 2205; }
+                        else if (convertFromVal==tonne && convertedToVal==oz) { resultVal = weightInputVal * 35270; }
                         ///----------------------
 
                         ///From kg to other units
-                        else if (convertFromVal==kg && convertedToVal==tonne) { resultVal = lengthInputVal/1000; }
-                        else if (convertFromVal==kg && convertedToVal==g) { resultVal = lengthInputVal * 1000; }
-                        else if (convertFromVal==kg && convertedToVal==mg) { resultVal = lengthInputVal * 1e+6; }
-                        else if (convertFromVal==kg && convertedToVal==ug) { resultVal = lengthInputVal * 1e+9; }
-                        else if (convertFromVal==kg && convertedToVal==impTon) { resultVal = lengthInputVal/1016; }
-                        else if (convertFromVal==kg && convertedToVal==usTon) { resultVal = lengthInputVal/907.2; }
-                        else if (convertFromVal==kg && convertedToVal==stone) { resultVal = lengthInputVal/6.35; }
-                        else if (convertFromVal==kg && convertedToVal==lb) { resultVal = lengthInputVal * 2.205; }
-                        else if (convertFromVal==kg && convertedToVal==oz) { resultVal = lengthInputVal * 35.274; }
+                        else if (convertFromVal==kg && convertedToVal==tonne) { resultVal = weightInputVal/1000; }
+                        else if (convertFromVal==kg && convertedToVal==g) { resultVal = weightInputVal * 1000; }
+                        else if (convertFromVal==kg && convertedToVal==mg) { resultVal = weightInputVal * 1e+6; }
+                        else if (convertFromVal==kg && convertedToVal==ug) { resultVal = weightInputVal * 1e+9; }
+                        else if (convertFromVal==kg && convertedToVal==impTon) { resultVal = weightInputVal/1016; }
+                        else if (convertFromVal==kg && convertedToVal==usTon) { resultVal = weightInputVal/907.2; }
+                        else if (convertFromVal==kg && convertedToVal==stone) { resultVal = weightInputVal/6.35; }
+                        else if (convertFromVal==kg && convertedToVal==lb) { resultVal = weightInputVal * 2.205; }
+                        else if (convertFromVal==kg && convertedToVal==oz) { resultVal = weightInputVal * 35.274; }
                         ///----------------------
 
                         ///From gram to other units
-                        else if (convertFromVal==g && convertedToVal==tonne) { resultVal = lengthInputVal/1e+6; }
-                        else if (convertFromVal==g && convertedToVal==kg) { resultVal = lengthInputVal/1000; }
-                        else if (convertFromVal==g && convertedToVal==mg) { resultVal = lengthInputVal * 1000; }
-                        else if (convertFromVal==g && convertedToVal==ug) { resultVal = lengthInputVal * 1e+6; }
-                        else if (convertFromVal==g && convertedToVal==impTon) { resultVal = lengthInputVal/1.016e+6; }
-                        else if (convertFromVal==g && convertedToVal==usTon) { resultVal = lengthInputVal/907200; }
-                        else if (convertFromVal==g && convertedToVal==stone) { resultVal = lengthInputVal/6350; }
-                        else if (convertFromVal==g && convertedToVal==lb) { resultVal = lengthInputVal/453.6; }
-                        else if (convertFromVal==g && convertedToVal==oz) { resultVal = lengthInputVal/28.35; }
+                        else if (convertFromVal==g && convertedToVal==tonne) { resultVal = weightInputVal/1e+6; }
+                        else if (convertFromVal==g && convertedToVal==kg) { resultVal = weightInputVal/1000; }
+                        else if (convertFromVal==g && convertedToVal==mg) { resultVal = weightInputVal * 1000; }
+                        else if (convertFromVal==g && convertedToVal==ug) { resultVal = weightInputVal * 1e+6; }
+                        else if (convertFromVal==g && convertedToVal==impTon) { resultVal = weightInputVal/1.016e+6; }
+                        else if (convertFromVal==g && convertedToVal==usTon) { resultVal = weightInputVal/907200; }
+                        else if (convertFromVal==g && convertedToVal==stone) { resultVal = weightInputVal/6350; }
+                        else if (convertFromVal==g && convertedToVal==lb) { resultVal = weightInputVal/453.6; }
+                        else if (convertFromVal==g && convertedToVal==oz) { resultVal = weightInputVal/28.35; }
                         ///----------------------
 
                         ///From milligram to other units
-                        else if (convertFromVal==mg && convertedToVal==tonne) { resultVal = lengthInputVal/1e+9; }
-                        else if (convertFromVal==mg && convertedToVal==kg) { resultVal = lengthInputVal/1e+6; }
-                        else if (convertFromVal==mg && convertedToVal==g) { resultVal = lengthInputVal/1000; }
-                        else if (convertFromVal==mg && convertedToVal==ug) { resultVal = lengthInputVal * 1000; }
-                        else if (convertFromVal==mg && convertedToVal==impTon) { resultVal = lengthInputVal * 1.016e+9; }
-                        else if (convertFromVal==mg && convertedToVal==usTon) { resultVal = lengthInputVal/9.072e+8; }
-                        else if (convertFromVal==mg && convertedToVal==stone) { resultVal = lengthInputVal/6.35e+6; }
-                        else if (convertFromVal==mg && convertedToVal==lb) { resultVal = lengthInputVal/453600; }
-                        else if (convertFromVal==mg && convertedToVal==oz) { resultVal = lengthInputVal/28350; }
+                        else if (convertFromVal==mg && convertedToVal==tonne) { resultVal = weightInputVal/1e+9; }
+                        else if (convertFromVal==mg && convertedToVal==kg) { resultVal = weightInputVal/1e+6; }
+                        else if (convertFromVal==mg && convertedToVal==g) { resultVal = weightInputVal/1000; }
+                        else if (convertFromVal==mg && convertedToVal==ug) { resultVal = weightInputVal * 1000; }
+                        else if (convertFromVal==mg && convertedToVal==impTon) { resultVal = weightInputVal * 1.016e+9; }
+                        else if (convertFromVal==mg && convertedToVal==usTon) { resultVal = weightInputVal/9.072e+8; }
+                        else if (convertFromVal==mg && convertedToVal==stone) { resultVal = weightInputVal/6.35e+6; }
+                        else if (convertFromVal==mg && convertedToVal==lb) { resultVal = weightInputVal/453600; }
+                        else if (convertFromVal==mg && convertedToVal==oz) { resultVal = weightInputVal/28350; }
                         ///----------------------
 
                         ///From microgram to other units
-                        else if (convertFromVal==ug && convertedToVal==tonne) { resultVal = lengthInputVal/1e+12; }
-                        else if (convertFromVal==ug && convertedToVal==kg) { resultVal = lengthInputVal/1e+9; }
-                        else if (convertFromVal==ug && convertedToVal==g) { resultVal = lengthInputVal/1e+6; }
-                        else if (convertFromVal==ug && convertedToVal==mg) { resultVal = lengthInputVal/1000; }
-                        else if (convertFromVal==ug && convertedToVal==impTon) { resultVal = lengthInputVal/1.016e+12; }
-                        else if (convertFromVal==ug && convertedToVal==usTon) { resultVal = lengthInputVal/9.072e+11; }
-                        else if (convertFromVal==ug && convertedToVal==stone) { resultVal = lengthInputVal/6.35e+9; }
-                        else if (convertFromVal==ug && convertedToVal==lb) { resultVal = lengthInputVal/4.536e+8; }
-                        else if (convertFromVal==ug && convertedToVal==oz) { resultVal = lengthInputVal/2.835e+7; }
+                        else if (convertFromVal==ug && convertedToVal==tonne) { resultVal = weightInputVal/1e+12; }
+                        else if (convertFromVal==ug && convertedToVal==kg) { resultVal = weightInputVal/1e+9; }
+                        else if (convertFromVal==ug && convertedToVal==g) { resultVal = weightInputVal/1e+6; }
+                        else if (convertFromVal==ug && convertedToVal==mg) { resultVal = weightInputVal/1000; }
+                        else if (convertFromVal==ug && convertedToVal==impTon) { resultVal = weightInputVal/1.016e+12; }
+                        else if (convertFromVal==ug && convertedToVal==usTon) { resultVal = weightInputVal/9.072e+11; }
+                        else if (convertFromVal==ug && convertedToVal==stone) { resultVal = weightInputVal/6.35e+9; }
+                        else if (convertFromVal==ug && convertedToVal==lb) { resultVal = weightInputVal/4.536e+8; }
+                        else if (convertFromVal==ug && convertedToVal==oz) { resultVal = weightInputVal/2.835e+7; }
                         ///----------------------
 
                         ///From imperial ton to other units
-                        else if (convertFromVal==impTon && convertedToVal==tonne) { resultVal = lengthInputVal * 1.016; }
-                        else if (convertFromVal==impTon && convertedToVal==kg) { resultVal = lengthInputVal * 1016; }
-                        else if (convertFromVal==impTon && convertedToVal==g) { resultVal = lengthInputVal * 1.016e+6; }
-                        else if (convertFromVal==impTon && convertedToVal==mg) { resultVal = lengthInputVal * 1.016e+9; }
-                        else if (convertFromVal==impTon && convertedToVal==ug) { resultVal = lengthInputVal * 1.016e+12; }
-                        else if (convertFromVal==impTon && convertedToVal==usTon) { resultVal = lengthInputVal * 1.12; }
-                        else if (convertFromVal==impTon && convertedToVal==stone) { resultVal = lengthInputVal * 160; }
-                        else if (convertFromVal==impTon && convertedToVal==lb) { resultVal = lengthInputVal * 2240; }
-                        else if (convertFromVal==impTon && convertedToVal==oz) { resultVal = lengthInputVal * 35840; }
+                        else if (convertFromVal==impTon && convertedToVal==tonne) { resultVal = weightInputVal * 1.016; }
+                        else if (convertFromVal==impTon && convertedToVal==kg) { resultVal = weightInputVal * 1016; }
+                        else if (convertFromVal==impTon && convertedToVal==g) { resultVal = weightInputVal * 1.016e+6; }
+                        else if (convertFromVal==impTon && convertedToVal==mg) { resultVal = weightInputVal * 1.016e+9; }
+                        else if (convertFromVal==impTon && convertedToVal==ug) { resultVal = weightInputVal * 1.016e+12; }
+                        else if (convertFromVal==impTon && convertedToVal==usTon) { resultVal = weightInputVal * 1.12; }
+                        else if (convertFromVal==impTon && convertedToVal==stone) { resultVal = weightInputVal * 160; }
+                        else if (convertFromVal==impTon && convertedToVal==lb) { resultVal = weightInputVal * 2240; }
+                        else if (convertFromVal==impTon && convertedToVal==oz) { resultVal = weightInputVal * 35840; }
                         ///----------------------
 
                         ///From US ton to other units
-                        else if (convertFromVal==usTon && convertedToVal==tonne) { resultVal = lengthInputVal/1.102; }
-                        else if (convertFromVal==usTon && convertedToVal==kg) { resultVal = lengthInputVal * 907.2; }
-                        else if (convertFromVal==usTon && convertedToVal==g) { resultVal = lengthInputVal * 907200; }
-                        else if (convertFromVal==usTon && convertedToVal==mg) { resultVal = lengthInputVal * 9.072e+8; }
-                        else if (convertFromVal==usTon && convertedToVal==ug) { resultVal = lengthInputVal * 9.072e+11; }
-                        else if (convertFromVal==usTon && convertedToVal==impTon) { resultVal = lengthInputVal/1.12; }
-                        else if (convertFromVal==usTon && convertedToVal==stone) { resultVal = lengthInputVal * 142.9; }
-                        else if (convertFromVal==usTon && convertedToVal==lb) { resultVal = lengthInputVal * 2000; }
-                        else if (convertFromVal==usTon && convertedToVal==oz) { resultVal = lengthInputVal * 32000; }
+                        else if (convertFromVal==usTon && convertedToVal==tonne) { resultVal = weightInputVal/1.102; }
+                        else if (convertFromVal==usTon && convertedToVal==kg) { resultVal = weightInputVal * 907.2; }
+                        else if (convertFromVal==usTon && convertedToVal==g) { resultVal = weightInputVal * 907200; }
+                        else if (convertFromVal==usTon && convertedToVal==mg) { resultVal = weightInputVal * 9.072e+8; }
+                        else if (convertFromVal==usTon && convertedToVal==ug) { resultVal = weightInputVal * 9.072e+11; }
+                        else if (convertFromVal==usTon && convertedToVal==impTon) { resultVal = weightInputVal/1.12; }
+                        else if (convertFromVal==usTon && convertedToVal==stone) { resultVal = weightInputVal * 142.9; }
+                        else if (convertFromVal==usTon && convertedToVal==lb) { resultVal = weightInputVal * 2000; }
+                        else if (convertFromVal==usTon && convertedToVal==oz) { resultVal = weightInputVal * 32000; }
                         ///----------------------
 
                         ///From stone to other units
-                        else if (convertFromVal==stone && convertedToVal==tonne) { resultVal = lengthInputVal/157.5; }
-                        else if (convertFromVal==stone && convertedToVal==kg) { resultVal = lengthInputVal * 6.35; }
-                        else if (convertFromVal==stone && convertedToVal==g) { resultVal = lengthInputVal * 6350; }
-                        else if (convertFromVal==stone && convertedToVal==mg) { resultVal = lengthInputVal * 6.35e+6; }
-                        else if (convertFromVal==stone && convertedToVal==ug) { resultVal = lengthInputVal * 6.35e+9; }
-                        else if (convertFromVal==stone && convertedToVal==impTon) { resultVal = lengthInputVal/160; }
-                        else if (convertFromVal==stone && convertedToVal==usTon) { resultVal = lengthInputVal/142.9; }
-                        else if (convertFromVal==stone && convertedToVal==lb) { resultVal = lengthInputVal * 14; }
-                        else if (convertFromVal==stone && convertedToVal==oz) { resultVal = lengthInputVal * 224; }
+                        else if (convertFromVal==stone && convertedToVal==tonne) { resultVal = weightInputVal/157.5; }
+                        else if (convertFromVal==stone && convertedToVal==kg) { resultVal = weightInputVal * 6.35; }
+                        else if (convertFromVal==stone && convertedToVal==g) { resultVal = weightInputVal * 6350; }
+                        else if (convertFromVal==stone && convertedToVal==mg) { resultVal = weightInputVal * 6.35e+6; }
+                        else if (convertFromVal==stone && convertedToVal==ug) { resultVal = weightInputVal * 6.35e+9; }
+                        else if (convertFromVal==stone && convertedToVal==impTon) { resultVal = weightInputVal/160; }
+                        else if (convertFromVal==stone && convertedToVal==usTon) { resultVal = weightInputVal/142.9; }
+                        else if (convertFromVal==stone && convertedToVal==lb) { resultVal = weightInputVal * 14; }
+                        else if (convertFromVal==stone && convertedToVal==oz) { resultVal = weightInputVal * 224; }
                         ///----------------------
 
                         ///From lbs to other units
-                        else if (convertFromVal==lb && convertedToVal==tonne) { resultVal = lengthInputVal/2205; }
-                        else if (convertFromVal==lb && convertedToVal==kg) { resultVal = lengthInputVal/2.205; }
-                        else if (convertFromVal==lb && convertedToVal==g) { resultVal = lengthInputVal * 453.6; }
-                        else if (convertFromVal==lb && convertedToVal==mg) { resultVal = lengthInputVal * 453600; }
-                        else if (convertFromVal==lb && convertedToVal==ug) { resultVal = lengthInputVal * 4.536e+8; }
-                        else if (convertFromVal==lb && convertedToVal==impTon) { resultVal = lengthInputVal/2240; }
-                        else if (convertFromVal==lb && convertedToVal==usTon) { resultVal = lengthInputVal/2000; }
-                        else if (convertFromVal==lb && convertedToVal==stone) { resultVal = lengthInputVal/14; }
-                        else if (convertFromVal==lb && convertedToVal==oz) { resultVal = lengthInputVal * 16; }
+                        else if (convertFromVal==lb && convertedToVal==tonne) { resultVal = weightInputVal/2205; }
+                        else if (convertFromVal==lb && convertedToVal==kg) { resultVal = weightInputVal/2.205; }
+                        else if (convertFromVal==lb && convertedToVal==g) { resultVal = weightInputVal * 453.6; }
+                        else if (convertFromVal==lb && convertedToVal==mg) { resultVal = weightInputVal * 453600; }
+                        else if (convertFromVal==lb && convertedToVal==ug) { resultVal = weightInputVal * 4.536e+8; }
+                        else if (convertFromVal==lb && convertedToVal==impTon) { resultVal = weightInputVal/2240; }
+                        else if (convertFromVal==lb && convertedToVal==usTon) { resultVal = weightInputVal/2000; }
+                        else if (convertFromVal==lb && convertedToVal==stone) { resultVal = weightInputVal/14; }
+                        else if (convertFromVal==lb && convertedToVal==oz) { resultVal = weightInputVal * 16; }
                         ///----------------------
 
                         ///From oz to other units
-                        else if (convertFromVal==oz && convertedToVal==tonne) { resultVal = lengthInputVal/35270; }
-                        else if (convertFromVal==oz && convertedToVal==kg) { resultVal = lengthInputVal/35.274; }
-                        else if (convertFromVal==oz && convertedToVal==g) { resultVal = lengthInputVal * 28.35; }
-                        else if (convertFromVal==oz && convertedToVal==mg) { resultVal = lengthInputVal * 28350; }
-                        else if (convertFromVal==oz && convertedToVal==ug) { resultVal = lengthInputVal * 2.835e+7; }
-                        else if (convertFromVal==oz && convertedToVal==impTon) { resultVal = lengthInputVal/35840; }
-                        else if (convertFromVal==oz && convertedToVal==usTon) { resultVal = lengthInputVal/32000; }
-                        else if (convertFromVal==oz && convertedToVal==stone) { resultVal = lengthInputVal/224; }
-                        else if (convertFromVal==oz && convertedToVal==lb) { resultVal = lengthInputVal/16; }
+                        else if (convertFromVal==oz && convertedToVal==tonne) { resultVal = weightInputVal/35270; }
+                        else if (convertFromVal==oz && convertedToVal==kg) { resultVal = weightInputVal/35.274; }
+                        else if (convertFromVal==oz && convertedToVal==g) { resultVal = weightInputVal * 28.35; }
+                        else if (convertFromVal==oz && convertedToVal==mg) { resultVal = weightInputVal * 28350; }
+                        else if (convertFromVal==oz && convertedToVal==ug) { resultVal = weightInputVal * 2.835e+7; }
+                        else if (convertFromVal==oz && convertedToVal==impTon) { resultVal = weightInputVal/35840; }
+                        else if (convertFromVal==oz && convertedToVal==usTon) { resultVal = weightInputVal/32000; }
+                        else if (convertFromVal==oz && convertedToVal==stone) { resultVal = weightInputVal/224; }
+                        else if (convertFromVal==oz && convertedToVal==lb) { resultVal = weightInputVal/16; }
                         ///----------------------
 
                         setState(() {
@@ -2057,9 +2057,28 @@ class _WeightConv extends State<WeightConversion> {
   }
 }
 
-///Class for Temperature conversions
-class TemperatureConv extends StatelessWidget {
+class TemperatureConv extends StatefulWidget {
   const TemperatureConv({super.key});
+  @override
+  State<StatefulWidget> createState() => _TemperatureConv();
+}
+
+///Class for Temperature conversions
+class _TemperatureConv extends State<TemperatureConv> {
+  TextEditingController firstConversion = TextEditingController();
+  TextEditingController secondConversion = TextEditingController();
+
+  var valA = '';
+  double resultVal = 0.0;
+
+  String convertFromVal = '';
+  String convertedToVal = '';
+
+  List<String> temperatureItems = [
+    'Celsius',
+    'Fahrenheit',
+    'Kelvin',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -2080,6 +2099,258 @@ class TemperatureConv extends StatelessWidget {
         ),
         leading: const BackButton(
           color: Colors.white,
+        ),
+      ),
+      body: Container(
+        color: Colors.white,
+        padding: EdgeInsets.all(20.0),
+        child: Center(
+          child: SizedBox(
+            width: 350,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Column(
+                    children: [
+                      Container(
+                        height: 200,
+                        width: 350,
+                        padding: const EdgeInsets.all(5.0),
+                        decoration: BoxDecoration(
+                          border: Border.all(width: 5, color: Colors.black45),
+                          borderRadius: BorderRadius.all(Radius.circular(25)),
+                        ),
+                        child: Column(
+                          children: [
+                            const Text(
+                              'Convert from :',
+                              style: TextStyle(
+                                fontSize: 15,
+                                color: Colors.black87,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              textAlign: TextAlign.start,
+                            ),
+                            const SizedBox(height: 15,),
+                            SizedBox(
+                              child: Container(
+                                width: 150,
+                                height: 50,
+                                child: DropdownButtonFormField<String>(
+                                  isExpanded: true,
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.black45,
+                                  ),
+                                  items: temperatureItems.map<DropdownMenuItem<String>>((String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Center(
+                                        child: Text(
+                                          value,
+                                          style: const TextStyle(
+                                            fontSize: 20,
+                                            color: Colors.black45,),
+                                        ),
+                                      ),
+                                    );
+                                  }).toList(),
+                                  hint: const Align(
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      'Units',
+                                      style: TextStyle(
+                                        fontSize: 17,
+                                        color: Colors.black45,),
+                                    ),
+                                  ),
+                                  onChanged: (String? newValue) {
+                                    setState(() {
+                                      //Current value of the drop down button
+                                      convertFromVal = newValue!;
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 32,),
+                            TextField(
+                              controller: firstConversion,
+                              textAlign: TextAlign.center,
+                              decoration: InputDecoration(
+                                border: myInputBorder(),
+                                enabledBorder: myInputBorder(),
+                                label: const Center(
+                                  child: Text(
+                                    'Enter Value',
+                                    style: TextStyle(fontSize: 16, color: Colors.black38),
+                                  ),
+                                ),
+                              ),
+                              style: const TextStyle(
+                                  color: Colors.black45,
+                                  fontSize: 20
+                              ),
+                              keyboardType: TextInputType.number,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 25,),
+                  Column(
+                    children: [
+                      Container(
+                        height: 200,
+                        width: 350,
+                        padding: const EdgeInsets.all(5.0),
+                        decoration: BoxDecoration(
+                          border: Border.all(width: 5, color: Colors.black45),
+                          borderRadius: BorderRadius.all(Radius.circular(25)),
+                        ),
+                        child: Column(
+                          children: [
+                            const Text(
+                              'Convert to :',
+                              style: TextStyle(
+                                fontSize: 15,
+                                color: Colors.black87,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              textAlign: TextAlign.start,
+                            ),
+                            const SizedBox(height: 15,),
+                            SizedBox(
+                              child: Container(
+                                width: 150,
+                                height: 50,
+                                child: DropdownButtonFormField<String>(
+                                  isExpanded: true,
+                                  style: const TextStyle(
+                                    fontSize: 17,
+                                    color: Colors.black45,
+                                  ),
+                                  items: temperatureItems.map<DropdownMenuItem<String>>((String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Center(
+                                        child: Text(
+                                          value,
+                                          style: const TextStyle(
+                                            fontSize: 20,
+                                            color: Colors.black45,),
+                                        ),
+                                      ),
+                                    );
+                                  }).toList(),
+                                  hint: const Align(
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      'Units',
+                                      style: TextStyle(
+                                        fontSize: 17,
+                                        color: Colors.black45,),
+                                    ),
+                                  ),
+                                  onChanged: (String? newValue) {
+                                    setState(() {
+                                      //Current value of the drop down button
+                                      convertedToVal = newValue!;
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 35,),
+                            Text(
+                              resultVal.toStringAsFixed(2),
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                                color: Colors.black45,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 20,),
+                  ElevatedButton(
+                    style: ButtonStyle(
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                      ),
+                    ),
+                    onPressed: () {
+                      var tempInput = firstConversion.text.toString();
+
+                      String celsius = temperatureItems[0];
+                      String fahrenheit = temperatureItems[1];
+                      String kelvin = temperatureItems[2];
+
+                      if (tempInput!='') {
+                        var tempInputVal = double.parse(tempInput);
+
+                        if (convertFromVal == convertedToVal) { resultVal = tempInputVal * 1; }
+
+                        ///From celsius to other units
+                        else if (convertFromVal==celsius && convertedToVal==fahrenheit) { resultVal = (tempInputVal*(9/5))+32; }
+                        else if (convertFromVal==celsius && convertedToVal==kelvin) { resultVal = tempInputVal+273.15; }
+                        ///----------------------
+
+                        ///From fahrenheit to other units
+                        else if (convertFromVal==fahrenheit && convertedToVal==celsius) { resultVal = (tempInputVal-32)*(5/9); }
+                        else if (convertFromVal==fahrenheit && convertedToVal==kelvin) { resultVal = ((tempInputVal-32)*(5/9))+273.15; }
+                        ///----------------------
+
+                        ///From kelvin to other units
+                        else if (convertFromVal==kelvin && convertedToVal==celsius) { resultVal = tempInputVal-273.15; }
+                        else if (convertFromVal==kelvin && convertedToVal==fahrenheit) { resultVal = ((tempInputVal/-273.15)*(9/5))+32; }
+                        ///----------------------
+
+                        setState(() {
+                          resultVal;
+                        });
+                      }
+                    },
+                    child: const Text(
+                      'Calculate',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 10,),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        firstConversion.clear();
+                        secondConversion.clear();
+                        resultVal = 0.0;
+                      });
+                    },
+                    child: const Text(
+                      'Clear',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w700,
+                        color: Colors.redAccent,
+                        fontSize: 17,
+                        decoration: TextDecoration.underline,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ),
       ),
     );
