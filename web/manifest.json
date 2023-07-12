@@ -1,6 +1,6 @@
 {
-    "name": "calculator",
-    "short_name": "calculator",
+    "name": "Converculator",
+    "short_name": "Converculator",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
